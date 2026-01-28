@@ -1,4 +1,5 @@
 import Hero from "./components/Hero";
+import AboutSection from "./components/AboutSection";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import LiterasiPondok from "./components/LiterasiPondok";
@@ -11,6 +12,7 @@ const Page = () => {
       <main className="pt-16">
         <Hero />
         <LiterasiPondok />
+        <AboutSection />
         <Galeri />
       </main>
       <Footer />
