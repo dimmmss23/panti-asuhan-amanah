@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Homepage Panti</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: #2d5016;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .navbar-menu a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2d5016 0%, #1a3009 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: white;
+            color: #2d5016;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #2d5016;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Literasi Pondok Section */
+        .literasi-section {
+            background-color: #f8f9fa;
+        }
+        
+        .literasi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .literasi-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .literasi-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .literasi-card h3 {
+            color: #2d5016;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .literasi-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .literasi-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #2d5016;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Mutiara Hikmah Section */
+        .mutiara-hikmah-section {
+            background-color: white;
+        }
+        
+        .video-main {
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background-color: #999;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .video-slider {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .video-item {
+            background: transparent;
+        }
+        
+        .video-item .video-container {
+            background-color: #999;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            background-color: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 3rem;
+        }
+        
+        .gallery-content {
+            padding: 1.5rem;
+        }
+        
+        .gallery-content h3 {
+            color: #2d5016;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .gallery-content p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .gallery-date {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #1a3009;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-section p,
+        .footer-section ul {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">Panti Asuhan</div>
+            <ul class="navbar-menu">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Selamat Datang di Panti Asuhan</h1>
+            <p>Memberikan kasih sayang dan pendidikan terbaik untuk masa depan anak-anak</p>
+            <a href="#tentang" class="btn">Selengkapnya</a>
+        </div>
+    </section>
+
+    <!-- Program Section -->
+    <section class="literasi-section" id="literasi">
+        <div class="container">
+            <div class="section-header">
+                <h2>Program Panti Asuhan</h2>
+                <p>Program-program unggulan yang kami sediakan untuk perkembangan anak-anak</p>
+            </div>
+            
+            <div class="literasi-grid">
+                <div class="literasi-card">
+                    <div class="literasi-icon">📚</div>
+                    <h3>Pendidikan Al-Quran</h3>
+                    <p>Program belajar membaca, menghafal, dan memahami Al-Quran dengan metode yang menyenangkan dan efektif untuk anak-anak.</p>
+                </div>
+                
+                <div class="literasi-card">
+                    <div class="literasi-icon">🎓</div>
+                    <h3>Pendidikan Formal</h3>
+                    <p>Memfasilitasi pendidikan formal dari tingkat SD hingga SMA dengan guru-guru yang berkualitas dan berpengalaman.</p>
+                </div>
+                
+                <div class="literasi-card">
+                    <div class="literasi-icon">⚽</div>
+                    <h3>Kegiatan Ekstrakurikuler</h3>
+                    <p>Berbagai kegiatan ekstrakurikuler seperti olahraga, seni, dan keterampilan untuk mengembangkan bakat anak.</p>
+                </div>
+            
+                
+                <div class="literasi-card">
+                    <div class="literasi-icon">🤝</div>
+                    <h3>Pembinaan Karakter</h3>
+                    <p>Membentuk karakter yang baik melalui nilai-nilai agama, akhlak mulia, dan etika kehidupan bermasyarakat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mutiara Hikmah Section -->
+    <section class="mutiara-hikmah-section" id="mutiara-hikmah">
+        <div class="container">
+            <div class="section-header">
+                <h2>Mutiara Hikmah</h2>
+                <p>Video inspiratif tentang keutamaan donasi dan berbagi</p>
+            </div>
+            
+            <!-- Main Video -->
+            <div class="video-main">
+                <div class="video-container"></div>
+            </div>
+            
+            <!-- Video Slider -->
+            <div class="video-slider">
+                <div class="video-item">
+                    <div class="video-container"></div>
+                </div>
+                
+                <div class="video-item">
+                    <div class="video-container"></div>
+                </div>
+                
+                <div class="video-item">
+                    <div class="video-container"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="galeri">
+        <div class="container">
+            <div class="section-header">
+                <h2>Galeri Kegiatan</h2>
+                <p>Dokumentasi berbagai kegiatan dan momen berharga di panti asuhan</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-image">🖼️</div>
+                    <div class="gallery-content">
+                        <h3>Kegiatan Belajar Mengaji</h3>
+                        <p>Anak-anak sedang belajar mengaji bersama ustadz di musholla panti.</p>
+                        <div class="gallery-date">15 Januari 2026</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">🖼️</div>
+                    <div class="gallery-content">
+                        <h3>Olahraga Pagi</h3>
+                        <p>Kegiatan olahraga rutin setiap pagi untuk menjaga kesehatan anak-anak.</p>
+                        <div class="gallery-date">12 Januari 2026</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">🖼️</div>
+                    <div class="gallery-content">
+                        <h3>Kelas Komputer</h3>
+                        <p>Pembelajaran teknologi informasi dan komputer untuk bekal masa depan.</p>
+                        <div class="gallery-date">10 Januari 2026</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">🖼️</div>
+                    <div class="gallery-content">
+                        <h3>Kegiatan Seni dan Budaya</h3>
+                        <p>Anak-anak berlatih tari tradisional untuk acara hari kemerdekaan.</p>
+                        <div class="gallery-date">8 Januari 2026</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">🖼️</div>
+                    <div class="gallery-content">
+                        <h3>Makan Bersama</h3>
+                        <p>Waktu makan bersama yang penuh keceriaan dan kebersamaan.</p>
+                        <div class="gallery-date">5 Januari 2026</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">🖼️</div>
+                    <div class="gallery-content">
+                        <h3>Belajar Kelompok</h3>
+                        <p>Suasana belajar kelompok yang kondusif untuk persiapan ujian.</p>
+                        <div class="gallery-date">3 Januari 2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <p>Panti Asuhan yang berdedikasi untuk memberikan pendidikan dan kasih sayang terbaik bagi anak-anak yatim dan dhuafa.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li>📍 Alamat: Jl. Contoh No. 123, Kota</li>
+                        <li>📞 Telepon: (021) 1234-5678</li>
+                        <li>✉️ Email: info@panti.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#tentang">Tentang Kami</a></li>
+                        <li><a href="#galeri">Galeri</a></li>
+                        <li><a href="#kontak">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Jam Operasional</h3>
+                    <ul>
+                        <li>Senin - Jumat: 08.00 - 17.00</li>
+                        <li>Sabtu: 08.00 - 14.00</li>
+                        <li>Minggu: Tutup</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Panti Asuhan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

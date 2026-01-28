@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Profil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: #2d5016;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background-color: #f8f9fa;
+            padding: 100px 0 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #2d5016;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        /* Content Section */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2d5016;
+            margin-bottom: 3rem;
+        }
+        
+        /* Tentang Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background-color: #ddd;
+            border-radius: 8px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        /* Visi Misi Section */
+        .visi-misi-section {
+            background-color: #f8f9fa;
+        }
+        
+        .visi-misi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .visi-misi-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .visi-misi-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .visi-misi-card ul {
+            list-style-position: inside;
+            color: #666;
+            line-height: 2;
+        }
+        
+        .visi-misi-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* Pengurus Section */
+        .pengurus-section {
+            background-color: white;
+        }
+        
+        .pengurus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pengurus-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .pengurus-photo {
+            width: 100%;
+            height: 280px;
+            background-color: #ddd;
+        }
+        
+        .pengurus-info {
+            padding: 1.5rem;
+        }
+        
+        .pengurus-info h3 {
+            color: #333;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pengurus-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Sejarah Section */
+        .sejarah-section {
+            background-color: #f8f9fa;
+        }
+        
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2d5016;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #1a3009;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-section p,
+        .footer-section ul {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .visi-misi-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">Panti Asuhan</div>
+            <ul class="navbar-menu">
+                <li><a href="wireframe-home.html">Beranda</a></li>
+                <li><a href="wireframe-profil.html">Profil</a></li>
+                <li><a href="wireframe-donasi.html">Donasi</a></li>
+                <li><a href="wireframe-kontak.html">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Profil Panti Asuhan</h1>
+            <p>Mengenal lebih dekat tentang kami</p>
+        </div>
+    </section>
+
+    <!-- Tentang Kami Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Tentang Kami</h2>
+            <div class="about-content">
+                <div class="about-image"></div>
+                <div class="about-text">
+                    <h3>Selamat Datang</h3>
+                    <p>Panti Asuhan kami adalah rumah bagi anak-anak yatim dan dhuafa yang membutuhkan kasih sayang dan perhatian. Kami berdedikasi untuk memberikan pendidikan, pembinaan karakter, dan keterampilan hidup yang akan membantu mereka menjadi generasi yang mandiri dan berakhlak mulia.</p>
+                    <p>Sejak berdiri, kami telah mengasuh ratusan anak dan membantu mereka meraih masa depan yang lebih cerah. Dengan dukungan para donatur dan relawan, kami terus berupaya memberikan yang terbaik untuk anak-anak asuh kami.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visi Misi Section -->
+    <section class="visi-misi-section">
+        <div class="container">
+            <h2 class="section-title">Visi & Misi</h2>
+            <div class="visi-misi-grid">
+                <div class="visi-misi-card">
+                    <h3>Visi</h3>
+                    <p>Menjadi lembaga panti asuhan terpercaya yang menghasilkan generasi mandiri, berakhlak mulia, dan bermanfaat bagi masyarakat.</p>
+                </div>
+                <div class="visi-misi-card">
+                    <h3>Misi</h3>
+                    <ul>
+                        <li>Memberikan pendidikan berkualitas</li>
+                        <li>Membina karakter islami</li>
+                        <li>Mengembangkan keterampilan hidup</li>
+                        <li>Menciptakan lingkungan yang nyaman</li>
+                        <li>Membangun kemandirian anak</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pengurus Section -->
+    <section class="pengurus-section">
+        <div class="container">
+            <h2 class="section-title">Pengurus</h2>
+            <div class="pengurus-grid">
+                <div class="pengurus-card">
+                    <div class="pengurus-photo"></div>
+                    <div class="pengurus-info">
+                        <h3>Nama Ketua</h3>
+                        <p>Ketua Yayasan</p>
+                    </div>
+                </div>
+                <div class="pengurus-card">
+                    <div class="pengurus-photo"></div>
+                    <div class="pengurus-info">
+                        <h3>Nama Wakil</h3>
+                        <p>Wakil Ketua</p>
+                    </div>
+                </div>
+                <div class="pengurus-card">
+                    <div class="pengurus-photo"></div>
+                    <div class="pengurus-info">
+                        <h3>Nama Sekretaris</h3>
+                        <p>Sekretaris</p>
+                    </div>
+                </div>
+                <div class="pengurus-card">
+                    <div class="pengurus-photo"></div>
+                    <div class="pengurus-info">
+                        <h3>Nama Bendahara</h3>
+                        <p>Bendahara</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sejarah Section -->
+    <section class="sejarah-section">
+        <div class="container">
+            <h2 class="section-title">Sejarah</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2000</div>
+                    <div class="timeline-content">
+                        Panti Asuhan didirikan dengan 10 anak asuh pertama. Dimulai dari bangunan sederhana dengan fasilitas terbatas.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2005</div>
+                    <div class="timeline-content">
+                        Renovasi besar-besaran gedung dan penambahan fasilitas pendidikan. Jumlah anak asuh bertambah menjadi 30 anak.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2010</div>
+                    <div class="timeline-content">
+                        Pembangunan asrama baru dan ruang belajar. Program beasiswa untuk pendidikan tinggi dimulai.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        Digitalisasi sistem manajemen panti dan peluncuran program keterampilan digital untuk anak asuh.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-content">
+                        Saat ini kami mengasuh 50 anak dengan berbagai program pengembangan diri dan keterampilan yang terus berkembang.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <p>Panti Asuhan yang berdedikasi untuk memberikan pendidikan dan kasih sayang terbaik bagi anak-anak yatim dan dhuafa.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li>📍 Alamat: Jl. Contoh No. 123, Kota</li>
+                        <li>📞 Telepon: (021) 1234-5678</li>
+                        <li>✉️ Email: info@panti.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Link Cepat</h3>
+                    <ul>
+                        <li><a href="wireframe-home.html">Beranda</a></li>
+                        <li><a href="wireframe-profil.html">Profil</a></li>
+                        <li><a href="wireframe-donasi.html">Donasi</a></li>
+                        <li><a href="wireframe-kontak.html">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Jam Operasional</h3>
+                    <ul>
+                        <li>Senin - Jumat: 08.00 - 17.00</li>
+                        <li>Sabtu: 08.00 - 14.00</li>
+                        <li>Minggu: Tutup</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Panti Asuhan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
