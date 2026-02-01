@@ -1,0 +1,26 @@
+
+> web-panti@0.1.0 lint
+> eslint
+
+
+D:\laragon\www\web-panti\app\components\Galeri.tsx
+  39:29  warning  'galleryId' is defined but never used  @typescript-eslint/no-unused-vars
+  39:48  warning  'e' is defined but never used          @typescript-eslint/no-unused-vars
+
+D:\laragon\www\web-panti\app\components\LiterasiPondok.tsx
+  67:11  warning  'scrollSlider' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\laragon\www\web-panti\app\galeri\page.tsx
+  37:11  warning  'truncateText' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\laragon\www\web-panti\app\profil\ProfilClient.tsx
+   43:25   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+   69:33   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  184:37   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  184:370  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  203:37   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  203:262  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  221:33   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+✖ 11 problems (4 errors, 7 warnings)
+

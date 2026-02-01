@@ -34,10 +34,6 @@ const GaleriPage = () => {
         })
     }
 
-    const truncateText = (text: string, maxLength: number) => {
-        if (text.length <= maxLength) return text
-        return text.slice(0, maxLength) + "..."
-    }
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -82,7 +78,7 @@ const GaleriPage = () => {
                                         className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col"
                                     >
                                         {/* Image Container */}
-                                        <Link 
+                                        <Link
                                             href={`/galeri/${gallery.id}#main-content`}
                                             className="relative aspect-[4/3] overflow-hidden block"
                                         >
@@ -129,10 +125,10 @@ const GaleriPage = () => {
                                                 className="inline-flex items-center gap-1 sm:gap-2 text-green-600 font-medium text-xs sm:text-sm hover:text-green-700 transition-colors group/link mt-auto"
                                             >
                                                 Baca Selengkapnya
-                                                <svg 
-                                                    className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover/link:translate-x-1 transition-transform" 
-                                                    fill="none" 
-                                                    stroke="currentColor" 
+                                                <svg
+                                                    className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover/link:translate-x-1 transition-transform"
+                                                    fill="none"
+                                                    stroke="currentColor"
                                                     viewBox="0 0 24 24"
                                                 >
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

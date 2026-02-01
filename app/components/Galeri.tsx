@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 interface Gallery {
     id: number
@@ -35,7 +36,7 @@ const Galeri = () => {
         })
     }
 
-    const handleReadMore = (galleryId: number, e: React.MouseEvent) => {
+    const handleReadMore = () => {
         // For mobile, let the default behavior happen (will auto-scroll on detail page)
         // For desktop, just navigate normally
         if (window.innerWidth >= 768) {
@@ -43,11 +44,32 @@ const Galeri = () => {
         }
     }
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    }
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    }
+
     return (
-        <section className="py-16 sm:py-20 bg-white">
+        <section className="py-16 sm:py-20 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="text-center mb-12">
+                <motion.div
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                         Galeri Kegiatan
                     </h2>
@@ -55,7 +77,7 @@ const Galeri = () => {
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Dokumentasi kegiatan dan momen berharga di Panti Asuhan Amanah
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Gallery Grid - 2 columns on mobile */}
                 {isLoading ? (
@@ -67,10 +89,17 @@ const Galeri = () => {
                     </div>
                 ) : latestGalleries.length > 0 ? (
                     <>
-                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                        <motion.div
+                            className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
                             {latestGalleries.map((gallery) => (
-                                <div
+                                <motion.div
                                     key={gallery.id}
+                                    variants={itemVariants}
                                     className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"
                                 >
                                     {/* Image Container */}
@@ -115,25 +144,25 @@ const Galeri = () => {
                                         {/* Read More Button - Always at bottom */}
                                         <Link
                                             href={`/galeri/${gallery.id}#main-content`}
-                                            onClick={(e) => handleReadMore(gallery.id, e)}
+                                            onClick={() => handleReadMore()}
                                             className="inline-flex items-center gap-1 sm:gap-2 text-green-600 font-medium text-xs sm:text-sm hover:text-green-700 transition-colors group/link mt-auto"
                                         >
                                             Baca Selengkapnya
-                                            <svg 
-                                                className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover/link:translate-x-1 transition-transform" 
-                                                fill="none" 
-                                                stroke="currentColor" 
+                                            <svg
+                                                className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover/link:translate-x-1 transition-transform"
+                                                fill="none"
+                                                stroke="currentColor"
                                                 viewBox="0 0 24 24"
                                             >
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                             </svg>
                                         </Link>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
 
-                        {/* View All Button */}
+                        {/* View All Button*/}
                         <div className="text-center mt-12">
                             <Link
                                 href="/galeri"

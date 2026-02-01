@@ -1,17 +1,42 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { motion } from "framer-motion"
 
 const Footer = () => {
     const currentYear = new Date().getFullYear()
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+            }
+        }
+    }
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    }
+
     return (
-        <footer className="w-full bg-green-900">
+        <footer className="w-full bg-green-900 border-t border-green-800">
             <div className="max-w-7xl mx-auto py-12 px-6">
                 {/* Grid 4 Kolom */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                >
 
                     {/* Kolom 1 - Tentang Yayasan */}
-                    <div className="lg:col-span-1">
+                    <motion.div className="lg:col-span-1" variants={itemVariants}>
                         <div className="flex items-center gap-3 mb-4">
                             <Image
                                 src="/logo.png"
@@ -28,10 +53,10 @@ const Footer = () => {
                             Lembaga sosial yang berfokus pada pengasuhan, pendidikan, dan pembinaan anak yatim dan dhuafa dengan nilai-nilai keislaman.
                         </p>
 
-                    </div>
+                    </motion.div>
 
                     {/* Kolom 2 - Lokasi */}
-                    <div>
+                    <motion.div variants={itemVariants}>
                         <h3 className="text-yellow-400 font-bold text-lg mb-4">Lokasi Kami</h3>
 
                         {/* Lokasi 1 */}
@@ -63,10 +88,10 @@ const Footer = () => {
                                 Sumatera Selatan
                             </address>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Kolom 3 - Kontak */}
-                    <div>
+                    <motion.div variants={itemVariants}>
                         <h3 className="text-yellow-400 font-bold text-lg mb-4">Hubungi Kami</h3>
                         <ul className="space-y-3">
                             <li className="flex items-start gap-3">
@@ -89,10 +114,10 @@ const Footer = () => {
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </motion.div>
 
                     {/* Kolom 4 - Jam Operasional */}
-                    <div>
+                    <motion.div variants={itemVariants}>
                         <h3 className="text-yellow-400 font-bold text-lg mb-4">Jam Operasional</h3>
                         <div className="space-y-3">
                             <div className="flex items-center gap-3 p-3 bg-green-800/50 rounded-lg">
@@ -121,15 +146,20 @@ const Footer = () => {
                                 Donasi Sekarang
                             </Link>
                         </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
 
                 {/* Bagian Bawah Footer */}
-                <div className="border-t border-green-800 mt-10 pt-6">
+                <motion.div
+                    className="border-t border-green-800 mt-10 pt-6"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                >
                     <p className="text-center text-gray-400 text-sm">
                         © {currentYear} Yayasan Panti Asuhan Amanah. Dikelola dengan amanah untuk umat.
                     </p>
-                </div>
+                </motion.div>
             </div>
         </footer>
     )

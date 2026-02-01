@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface Video {
     id: string
@@ -17,24 +18,24 @@ const LiterasiPondok = () => {
 
     // Video data with YouTube IDs
     const videos: Video[] = [
-        { 
-            id: "UfK4FrCpUyc", 
-            title: "9 Keutamaan Shodaqoh | Surau Addin", 
+        {
+            id: "UfK4FrCpUyc",
+            title: "9 Keutamaan Shodaqoh | Surau Addin",
             thumbnail: `https://img.youtube.com/vi/UfK4FrCpUyc/maxresdefault.jpg`
         },
-        { 
-            id: "hHN58L5vevk", 
-            title: "Video Literasi Pondok", 
+        {
+            id: "hHN58L5vevk",
+            title: "Video Literasi Pondok",
             thumbnail: `https://img.youtube.com/vi/hHN58L5vevk/maxresdefault.jpg`
         },
-        { 
-            id: "tQjGHzT-tl8", 
-            title: "Literasi Pondok 2", 
+        {
+            id: "tQjGHzT-tl8",
+            title: "Literasi Pondok 2",
             thumbnail: `https://img.youtube.com/vi/tQjGHzT-tl8/maxresdefault.jpg`
         },
-        { 
-            id: "P3M1veFP3Z8", 
-            title: "Keutamaan Sedekah dengan Harta Halal", 
+        {
+            id: "P3M1veFP3Z8",
+            title: "Keutamaan Sedekah dengan Harta Halal",
             thumbnail: `https://img.youtube.com/vi/P3M1veFP3Z8/maxresdefault.jpg`
         },
     ]
@@ -63,15 +64,6 @@ const LiterasiPondok = () => {
         return () => window.removeEventListener("keydown", handleEscape)
     }, [])
 
-    const scrollSlider = (direction: "left" | "right") => {
-        if (sliderRef.current) {
-            const scrollAmount = 320
-            sliderRef.current.scrollBy({
-                left: direction === "left" ? -scrollAmount : scrollAmount,
-                behavior: "smooth"
-            })
-        }
-    }
 
     // Track scroll position
     useEffect(() => {
@@ -92,19 +84,31 @@ const LiterasiPondok = () => {
     }, [])
 
     return (
-        <section className="py-16 sm:py-20 bg-gray-50">
+        <section className="py-16 sm:py-20 bg-gray-50 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Title */}
-                <div className="text-center mb-12">
+                <motion.div
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: -30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                         Mutiara Hikmah
                     </h2>
                     <div className="w-24 h-1 bg-green-600 mx-auto rounded-full"></div>
-                </div>
+                </motion.div>
 
                 {/* Main Video - Large */}
-                <div className="mb-8">
-                    <div 
+                <motion.div
+                    className="mb-8"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <div
                         className="relative w-full max-w-4xl mx-auto cursor-pointer group"
                         onClick={() => openModal(mainVideo)}
                     >
@@ -118,21 +122,27 @@ const LiterasiPondok = () => {
                             />
                             {/* Overlay */}
                             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300" />
-                            
+
                             {/* Play Button */}
                             <div className="absolute inset-0 flex items-center justify-center">
                                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-green-700 transition-all duration-300">
                                     <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M8 5v14l11-7z"/>
+                                        <path d="M8 5v14l11-7z" />
                                     </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Slider Videos - Smaller Size */}
-                <div className="relative mt-8">
+                <motion.div
+                    className="relative mt-8"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                >
                     {/* Videos Slider */}
                     <div
                         ref={sliderRef}
@@ -163,12 +173,12 @@ const LiterasiPondok = () => {
                                         className="object-cover group-hover/card:scale-105 transition-transform duration-300"
                                     />
                                     <div className="absolute inset-0 bg-black/20 group-hover/card:bg-black/40 transition-colors duration-300" />
-                                    
+
                                     {/* Play Button */}
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600 rounded-full flex items-center justify-center shadow-lg opacity-90 group-hover/card:opacity-100 group-hover/card:scale-110 group-hover/card:bg-green-700 transition-all duration-300">
                                             <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M8 5v14l11-7z"/>
+                                                <path d="M8 5v14l11-7z" />
                                             </svg>
                                         </div>
                                     </div>
@@ -180,53 +190,61 @@ const LiterasiPondok = () => {
                     {/* Scroll Progress Bar - Mobile Only */}
                     <div className="mt-6 sm:hidden max-w-5xl mx-auto">
                         <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                            <div 
+                            <div
                                 className="h-full bg-green-600 rounded-full transition-all duration-300 ease-out"
                                 style={{ width: `${33.33 + (scrollProgress * 0.6667)}%` }}
                             />
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
 
             {/* Video Modal */}
-            {isModalOpen && selectedVideo && (
-                <div 
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4"
-                    onClick={closeModal}
-                >
-                    {/* Backdrop */}
-                    <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
-                    
-                    {/* Modal Content */}
-                    <div 
-                        className="relative w-full max-w-5xl z-10"
-                        onClick={(e) => e.stopPropagation()}
+            <AnimatePresence>
+                {isModalOpen && selectedVideo && (
+                    <motion.div
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                        onClick={closeModal}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                     >
-                        {/* Close Button */}
-                        <button
-                            onClick={closeModal}
-                            className="absolute -top-12 right-0 sm:top-0 sm:-right-12 p-2 text-white hover:text-gray-300 transition-colors"
-                            aria-label="Tutup video"
-                        >
-                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+                        {/* Backdrop */}
+                        <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
 
-                        {/* Video Container */}
-                        <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl bg-black">
-                            <iframe
-                                className="absolute top-0 left-0 w-full h-full"
-                                src={`https://www.youtube.com/embed/${selectedVideo.id}?autoplay=1&rel=0`}
-                                title={selectedVideo.title}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
+                        {/* Modal Content */}
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            className="relative w-full max-w-5xl z-10"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={closeModal}
+                                className="absolute -top-12 right-0 sm:top-0 sm:-right-12 p-2 text-white hover:text-gray-300 transition-colors"
+                                aria-label="Tutup video"
+                            >
+                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            {/* Video Container */}
+                            <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl bg-black">
+                                <iframe
+                                    className="absolute top-0 left-0 w-full h-full"
+                                    src={`https://www.youtube.com/embed/${selectedVideo.id}?autoplay=1&rel=0`}
+                                    title={selectedVideo.title}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     )
 }
