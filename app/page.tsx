@@ -1,18 +1,20 @@
 import Hero from "./components/Hero";
-import AboutSection from "./components/AboutSection";
+import Profil from "./components/Profil";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import LiterasiPondok from "./components/LiterasiPondok";
+import MutiaraHikmah from "./components/MutiaraHikmah";
 import Galeri from "./components/Galeri";
+import GlobePanti from "./components/GlobePanti";
 
 const Page = () => {
   return (
     <div>
       <Navbar />
-      <main className="pt-16">
+      <main className="pt-14">
         <Hero />
-        <LiterasiPondok />
-        <AboutSection />
+        <MutiaraHikmah />
+        <Profil />
+        <GlobePanti />
         <Galeri />
       </main>
       <Footer />

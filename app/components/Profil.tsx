@@ -2,18 +2,21 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-const AboutSection = () => {
+const Profil = () => {
     return (
         <section className="py-16 bg-white overflow-hidden">
             <div className="container mx-auto px-4 max-w-6xl">
                 <motion.div
-                    className="text-center mb-10"
-                    initial={{ opacity: 0, y: 50 }}
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: -30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-6">Tentang Kami</h2>
+                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                        Tentang Kami
+                    </h2>
+                    <div className="w-24 h-1 bg-green-600 mx-auto rounded-full mb-6"></div>
                     <p className="text-gray-600 text-lg leading-relaxed max-w-4xl mx-auto mb-8">
                         Yayasan Panti Asuhan Amanah hadir sebagai wujud kepedulian nyata terhadap masa depan generasi penerus bangsa.
                         Kami berkomitmen penuh memuliakan anak-anak yatim, piatu, dan dhuafa melalui sistem pengasuhan berbasis kekeluargaan,
@@ -34,4 +37,4 @@ const AboutSection = () => {
     );
 };
 
-export default AboutSection;
+export default Profil;

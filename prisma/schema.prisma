@@ -29,3 +29,26 @@ model Gallery {
   updatedAt DateTime @updatedAt
   @@map("galleries")
 }
+
+model Profil {
+  id        Int      @id @default(autoincrement())
+  AnakAsuh  Int
+  strukturorganisasi_URL  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Legalitas Legalitas[]
+
+  @@map("profiles")
+}
+model Legalitas {
+  id        Int      @id @default(autoincrement())
+  jenisdokumen String?
+  nomordokumen  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profil Profil @relation(fields: [profilId], references: [id])
+  profilId Int
+
+  @@map("legalitas")
+}

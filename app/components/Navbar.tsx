@@ -26,11 +26,8 @@ const Navbar = ({ session, signOutAction }: NavbarProps) => {
 
     const adminNavLinks = [
         { href: "/dashboard", label: "Dashboard" },
-        { href: "/dashboard/penghuni", label: "Penghuni" },
-        { href: "/dashboard/donasi", label: "Donasi" },
-        { href: "/dashboard/kegiatan", label: "Kegiatan" },
+        { href: "/dashboard/profil", label: "Profil" },
         { href: "/dashboard/gallery", label: "Galeri" },
-        { href: "/dashboard/pengaturan", label: "Pengaturan" },
     ]
 
     const navLinks = session ? adminNavLinks : publicNavLinks

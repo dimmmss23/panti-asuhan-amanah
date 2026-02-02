@@ -5,7 +5,44 @@ import Image from "next/image"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
-const ProfilClient = () => {
+interface Legalitas {
+    id: number
+    jenisdokumen: string | null
+    nomordokumen: string | null
+}
+
+interface Profil {
+    id: number
+    AnakAsuh: number
+    strukturorganisasi_URL: string
+    Legalitas: Legalitas[]
+}
+
+interface ProfilClientProps {
+    profil: Profil | null
+    legalitas: Legalitas[]
+}
+
+// Icon mapping untuk legalitas
+const getIconForLegalitas = (jenisdokumen: string | null): string => {
+    const iconMap: { [key: string]: string } = {
+        "SK Kemenkumham": "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+        "Akta Notaris": "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+        "Dinas Sosial": "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+        "Kelurahan": "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z",
+        "NPWP": "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z",
+    }
+    // Cari icon yang cocok berdasarkan kata kunci
+    for (const [key, icon] of Object.entries(iconMap)) {
+        if (jenisdokumen?.toLowerCase().includes(key.toLowerCase())) {
+            return icon
+        }
+    }
+    // Default icon
+    return "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+}
+
+const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
     // Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -106,70 +143,62 @@ const ProfilClient = () => {
                         {/* Legalitas */}
                         <div className="w-full mt-12 max-w-5xl">
                             <motion.div
-                                className="text-center mb-6"
+                                className="text-center mb-8"
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6 }}
                             >
-                                <h2 className="text-2xl font-semibold text-gray-800">Legalitas Yayasan Panti Asuhan Amanah</h2>
-                                <p className="text-gray-500 text-sm mt-2">Dokumen resmi yang menjamin kredibilitas Yayasan Panti Asuhan Amanah</p>
+                                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Legalitas Yayasan</h2>
+                                <div className="w-24 h-1 bg-green-600 mx-auto rounded-full mb-4"></div>
+                                <p className="text-gray-600 max-w-2xl mx-auto">Dokumen resmi yang menjamin kredibilitas Yayasan Panti Asuhan Amanah</p>
                             </motion.div>
-                            <motion.div
-                                className="grid md:grid-cols-2 gap-4 md:gap-6"
-                                variants={containerVariants}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                            >
-                                {[
-                                    {
-                                        title: "SK Kemenkumham RI",
-                                        value: "Nomor AHU-0026878.AH.01.04.Tahun 2021",
-                                        icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                    },
-                                    {
-                                        title: "Izin Akta Notaris (PRAPTA, S.H., M.Kn.)",
-                                        value: "Nomor AHU-0023.AH.02.02 Tahun 2018",
-                                        icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                                    },
-                                    {
-                                        title: "Izin Dinas Sosial (STPLKS)",
-                                        value: "Nomor 467/STPLKS/0026/DPMPTSP-PPK/2024",
-                                        icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                                    },
-                                    {
-                                        title: "Izin Kelurahan",
-                                        value: "Nomor 630/KU/1006/2024",
-                                        icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                    },
-                                    {
-                                        title: "NPWP",
-                                        value: "63.456.414.0-301.000",
-                                        icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                                    },
-                                ].map((item, index) => (
-                                    <motion.div
-                                        key={index}
-                                        className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex items-center gap-4"
-                                        variants={scaleVariants}
-                                    >
-                                        <div className="w-10 h-10 md:w-12 md:h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600 shrink-0">
-                                            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-semibold text-gray-800 text-sm">{item.title}</h3>
-                                            <p className="text-gray-600 font-medium text-xs md:text-sm break-all">{item.value}</p>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </motion.div>
+                            {legalitas.length > 0 ? (
+                                <motion.div
+                                    className="grid md:grid-cols-2 gap-4 md:gap-6"
+                                    variants={containerVariants}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true }}
+                                >
+                                    {legalitas.map((item) => (
+                                        <motion.div
+                                            key={item.id}
+                                            className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex items-center gap-4"
+                                            variants={scaleVariants}
+                                        >
+                                            <div className="w-10 h-10 md:w-12 md:h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600 shrink-0">
+                                                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={getIconForLegalitas(item.jenisdokumen)} />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 className="font-semibold text-gray-800 text-sm">{item.jenisdokumen}</h3>
+                                                <p className="text-gray-600 font-medium text-xs md:text-sm break-all">{item.nomordokumen}</p>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </motion.div>
+                            ) : (
+                                <div className="text-center text-gray-500 py-8">
+                                    <p>Data legalitas belum tersedia</p>
+                                </div>
+                            )}
                         </div>
 
                         {/* Visi & Misi Section */}
-                        <div className="w-full mt-16 grid md:grid-cols-2 gap-6 md:gap-10">
+                        <motion.div
+                            className="w-full mt-12 text-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Visi & Misi</h2>
+                            <div className="w-24 h-1 bg-green-600 mx-auto rounded-full mb-4"></div>
+                            <p className="text-gray-600 max-w-2xl mx-auto">Landasan dan tujuan Yayasan Panti Asuhan Amanah</p>
+                        </motion.div>
+                        <div className="w-full mt-8 grid md:grid-cols-2 gap-6 md:gap-10">
                             {/* Visi Card */}
                             <motion.div
                                 className="bg-green-50 rounded-2xl p-6 md:p-8 border border-green-100 flex flex-col items-center text-center hover:bg-green-100 transition-colors duration-300"
@@ -212,23 +241,24 @@ const ProfilClient = () => {
 
                         {/* Struktur Pengurus */}
                         <motion.div
-                            className="w-full mt-16 text-center"
+                            className="w-full mt-12 text-center"
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
                         >
-                            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Struktur Pengurus</h2>
-                            <p className="text-gray-600 max-w-3xl mx-auto mb-8">
-                                Yayasan Amanah dikelola oleh tim pengurus yang berdedikasi tinggi, amanah, dan profesional di bidangnya. Struktur organisasi kami disusun untuk memastikan setiap program kerja berjalan efektif demi kesejahteraan anak-anak asuh dan transparansi kepada para donatur.
+                            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Struktur Pengurus</h2>
+                            <div className="w-24 h-1 bg-green-600 mx-auto rounded-full mb-4"></div>
+                            <p className="text-gray-600 max-w-3xl mx-auto mb-6">
+                                Yayasan Amanah dikelola oleh tim pengurus yang berdedikasi tinggi, amanah, dan profesional di bidangnya.
                             </p>
-                            <div className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg border border-gray-100">
-                                <div className="relative w-full h-full min-h-[400px]">
+                            <div className="max-w-4xl mx-auto">
+                                <div className="relative w-full aspect-[4/3]">
                                     <Image
-                                        src="/struktur organisasi.png"
+                                        src={profil?.strukturorganisasi_URL || "/struktur organisasi.png"}
                                         alt="Struktur Organisasi Yayasan Amanah"
                                         fill
-                                        className="object-contain bg-white"
+                                        className="object-contain"
                                     />
                                 </div>
                             </div>
@@ -246,15 +276,16 @@ const ProfilClient = () => {
                     transition={{ duration: 0.8 }}
                 >
                     <div className="container mx-auto px-4">
-                        <motion.h2
-                            className="text-2xl md:text-3xl font-bold text-center mb-12"
+                        <motion.div
+                            className="text-center mb-12"
                             initial={{ y: -20, opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
                         >
-                            Data Yayasan
-                        </motion.h2>
+                            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Data Yayasan</h2>
+                            <div className="w-24 h-1 bg-green-400 mx-auto rounded-full"></div>
+                        </motion.div>
                         <motion.div
                             className="grid md:grid-cols-3 gap-8 text-center"
                             variants={containerVariants}
@@ -263,7 +294,7 @@ const ProfilClient = () => {
                             viewport={{ once: true }}
                         >
                             {[
-                                { label: "Anak Asuh", value: "38", sub: "Yatim, Piatu, Dhuafa", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
+                                { label: "Anak Asuh", value: profil?.AnakAsuh?.toString() || "0", sub: "Yatim, Piatu, Dhuafa", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
                                 { label: "Jenjang Usia", value: "3 - 17", sub: "Tahun", detail: "SD hingga SMA/SMK", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
                                 { label: "Program Unggulan", value: "3", sub: "Program Utama", detail: "Pendidikan, Tahfidz, Minat Bakat", icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" },
                             ].map((item, index) => (
