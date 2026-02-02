@@ -79,45 +79,108 @@ const ProgramClient = () => {
             <Navbar />
 
             <main className="flex-grow pt-16 pb-20">
-                {/* Page Header */}
-                <motion.section
-                    className="bg-gradient-to-br from-green-800 to-green-900 py-16 sm:py-20 mb-12"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                        <motion.span
-                            className="text-green-300 font-semibold tracking-wider uppercase text-sm mb-3 block"
-                            initial={{ y: -20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.2, duration: 0.5 }}
-                        >
-                            Program Unggulan
-                        </motion.span>
-                        <motion.h1
-                            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.3, duration: 0.5 }}
-                        >
-                            Program Kami
-                        </motion.h1>
-                        <motion.p
-                            className="text-green-100 text-lg sm:text-xl max-w-2xl mx-auto"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.4, duration: 0.5 }}
-                        >
-                            Dedikasi kami untuk masa depan anak yatim & dhuafa melalui pilar pendidikan, agama, kesehatan, dan kesejahteraan sosial.
-                        </motion.p>
+                {/* Hero Section - Islamic Elegant Theme */}
+                <section className="relative w-full py-20 md:py-28 overflow-hidden bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800">
+                    {/* Islamic Geometric Pattern Overlay */}
+                    <div className="absolute inset-0 opacity-10">
+                        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="islamic-pattern-program" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                                    <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="white" strokeWidth="1"/>
+                                    <circle cx="30" cy="30" r="15" fill="none" stroke="white" strokeWidth="1"/>
+                                    <circle cx="30" cy="30" r="8" fill="none" stroke="white" strokeWidth="1"/>
+                                    <path d="M30 15L45 30L30 45L15 30Z" fill="none" stroke="white" strokeWidth="0.5"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#islamic-pattern-program)"/>
+                        </svg>
                     </div>
-                </motion.section>
+                    
+                    {/* Decorative Glow Effects */}
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-400/20 rounded-full blur-3xl" />
+                    
+                    {/* Gold Accent Lines */}
+                    <div className="absolute top-10 left-0 right-0 flex justify-center">
+                        <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
+                    </div>
+                    <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+                        <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+                        <div className="text-center max-w-3xl mx-auto">
+                            {/* Decorative Icon */}
+                            <motion.div 
+                                className="flex justify-center mb-6"
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ delay: 0.2, duration: 0.5 }}
+                            >
+                                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                                    <svg className="w-8 h-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                    </svg>
+                                </div>
+                            </motion.div>
+                            
+                            {/* Badge */}
+                            <motion.span
+                                className="inline-block text-amber-300 font-semibold tracking-wider uppercase text-sm mb-4"
+                                initial={{ y: -20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.3, duration: 0.5 }}
+                            >
+                                Program Unggulan
+                            </motion.span>
+                            
+                            {/* Title */}
+                            <motion.h1 
+                                className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4"
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.4, duration: 0.5 }}
+                            >
+                                Program Kami
+                            </motion.h1>
+                            
+                            {/* Decorative Divider */}
+                            <motion.div 
+                                className="flex items-center justify-center gap-3 mb-6"
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 0.5, duration: 0.5 }}
+                            >
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-400/70" />
+                                <div className="w-2 h-2 bg-amber-400 rounded-full" />
+                                <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-400/70" />
+                            </motion.div>
+                            
+                            {/* Description */}
+                            <motion.p 
+                                className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed"
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.6, duration: 0.5 }}
+                            >
+                                Dedikasi kami untuk masa depan anak yatim & dhuafa melalui pilar pendidikan, agama, kesehatan, dan kesejahteraan sosial.
+                            </motion.p>
+                        </div>
+                    </div>
+
+                    {/* Bottom Wave */}
+                    <div className="absolute bottom-0 left-0 right-0">
+                        <svg className="w-full h-12 md:h-16" viewBox="0 0 1440 54" fill="none" preserveAspectRatio="none">
+                            <path d="M0 22L60 16.7C120 11 240 1 360 0.3C480 0 600 11 720 16.7C840 22 960 22 1080 19.3C1200 16 1320 11 1380 8.3L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z" fill="white"/>
+                        </svg>
+                    </div>
+                </section>
 
                 {/* Programs Grid */}
-                <div className="container mx-auto px-6 max-w-7xl">
+                <div className="container mx-auto px-4 sm:px-6 max-w-6xl py-12 md:py-16">
                     <motion.div
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
@@ -126,20 +189,25 @@ const ProgramClient = () => {
                         {programs.map((program, index) => (
                             <motion.div
                                 key={index}
-                                className="group bg-white rounded-2xl p-8 transition-all duration-300 border border-sky-100 hover:border-sky-200 hover:shadow-xl hover:-translate-y-1 flex flex-col"
+                                className="group relative bg-white rounded-xl p-6 transition-all duration-300 border border-gray-100 hover:border-green-200 flex flex-col overflow-hidden"
                                 variants={itemVariants}
-                                whileHover={{ scale: 1.02 }}
+                                whileHover={{ y: -3 }}
                             >
-                                {/* Icon Circle */}
-                                <div className="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-50 transition-colors duration-300">
-                                    {program.icon}
+                                {/* Top accent line */}
+                                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500" />
+                                
+                                {/* Icon */}
+                                <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-100 transition-colors duration-300">
+                                    <div className="w-8 h-8 text-green-600">
+                                        {program.icon}
+                                    </div>
                                 </div>
 
-                                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-green-700 transition-colors">
+                                <h3 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
                                     {program.title}
                                 </h3>
 
-                                <p className="text-gray-600 leading-relaxed text-sm flex-grow">
+                                <p className="text-gray-500 leading-relaxed text-xs flex-grow">
                                     {program.description}
                                 </p>
                             </motion.div>

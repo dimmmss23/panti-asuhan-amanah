@@ -75,13 +75,18 @@ export default function GlobeKontak() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                 >
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-green-100 text-green-700 text-sm font-semibold rounded-full mb-4">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
+                        </svg>
+                        Palembang, Sumatera Selatan
+                    </span>
                     <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                         Lokasi Panti Asuhan Amanah
                     </h3>
                     <div className="w-20 h-1 bg-green-600 mx-auto rounded-full" />
-                    <p className="text-center text-sm md:text-base font-normal text-neutral-600 max-w-md mt-4 mx-auto">
-                        Berlokasi di Palembang, Sumatera Selatan. Kami berkomitmen
-                        untuk menebar kebaikan dan kasih sayang ke seluruh penjuru.
+                    <p className="text-center text-sm md:text-base font-normal text-gray-600 max-w-md mt-4 mx-auto">
+                        Kunjungi kami dan lihat langsung kegiatan anak-anak asuh di Panti Asuhan Amanah.
                     </p>
                 </motion.div>
 

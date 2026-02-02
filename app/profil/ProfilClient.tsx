@@ -70,13 +70,14 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
             <Navbar />
 
             <main className="flex-grow">
-                {/* Hero Section */}
-                <div className="relative w-full">
+                {/* Hero Section - Islamic Elegant Theme with Photo */}
+                <section className="relative w-full min-h-[400px] md:min-h-[500px] overflow-hidden">
+                    {/* Background Image */}
                     <motion.div
-                        className="relative w-full h-[400px] md:h-[500px]"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
+                        className="absolute inset-0"
+                        initial={{ opacity: 0, scale: 1.1 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.2 }}
                     >
                         <Image
                             src="/Hero Profil.png"
@@ -85,18 +86,114 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                             className="object-cover object-center"
                             priority
                         />
-                        <div className="absolute inset-0 bg-black/20"></div>
                     </motion.div>
-                </div>
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/70 via-emerald-800/50 to-black/80" />
+
+                    {/* Islamic Geometric Pattern Overlay */}
+                    <div className="absolute inset-0 opacity-10">
+                        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="islamic-pattern-profil" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                                    <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="white" strokeWidth="1"/>
+                                    <circle cx="30" cy="30" r="15" fill="none" stroke="white" strokeWidth="1"/>
+                                    <circle cx="30" cy="30" r="8" fill="none" stroke="white" strokeWidth="1"/>
+                                    <path d="M30 15L45 30L30 45L15 30Z" fill="none" stroke="white" strokeWidth="0.5"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#islamic-pattern-profil)"/>
+                        </svg>
+                    </div>
+
+                    {/* Decorative Glow Effects */}
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl" />
+
+                    {/* Gold Accent Lines */}
+                    <div className="absolute top-6 md:top-10 left-0 right-0 flex justify-center">
+                        <div className="w-24 md:w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10 flex flex-col items-center justify-center min-h-[400px] md:min-h-[500px] px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+                        <div className="text-center max-w-3xl mx-auto">
+                            {/* Decorative Icon */}
+                            <motion.div 
+                                className="flex justify-center mb-4 md:mb-6"
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ delay: 0.3, duration: 0.5 }}
+                            >
+                                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                                    <svg className="w-7 h-7 md:w-8 md:h-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                </div>
+                            </motion.div>
+
+                            {/* Badge */}
+                            <motion.span
+                                className="inline-block text-amber-300 font-semibold tracking-wider uppercase text-xs md:text-sm mb-3 md:mb-4"
+                                initial={{ y: -20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.4, duration: 0.5 }}
+                            >
+                                Tentang Kami
+                            </motion.span>
+
+                            {/* Title */}
+                            <motion.h1 
+                                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-3 md:mb-4"
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.5, duration: 0.5 }}
+                            >
+                                Profil Yayasan
+                            </motion.h1>
+
+                            {/* Decorative Divider */}
+                            <motion.div 
+                                className="flex items-center justify-center gap-2 md:gap-3 mb-4 md:mb-6"
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 0.6, duration: 0.5 }}
+                            >
+                                <div className="w-8 md:w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-400/70" />
+                                <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-amber-400 rounded-full" />
+                                <div className="w-8 md:w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-400/70" />
+                            </motion.div>
+
+                            {/* Description */}
+                            <motion.p 
+                                className="text-base md:text-lg lg:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed px-2"
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.7, duration: 0.5 }}
+                            >
+                                Mengenal lebih dekat Yayasan Panti Asuhan Amanah, lembaga sosial yang berkomitmen memuliakan anak yatim dan dhuafa
+                            </motion.p>
+                        </div>
+                    </div>
+
+                    {/* Bottom Wave */}
+                    <div className="absolute -bottom-1 left-0 right-0">
+                        <svg className="w-full h-10 md:h-16" viewBox="0 0 1440 54" fill="none" preserveAspectRatio="none">
+                            <path d="M0 22L60 16.7C120 11 240 1 360 0.3C480 0 600 11 720 16.7C840 22 960 22 1080 19.3C1200 16 1320 11 1380 8.3L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z" fill="#f9fafb"/>
+                        </svg>
+                    </div>
+                </section>
 
                 {/* Main Content Card */}
-                <div className="container mx-auto px-4 max-w-6xl pb-20">
+                <div className="container mx-auto px-4 max-w-6xl pb-20 -mt-4">
                     <motion.div
-                        className="relative bg-white rounded-3xl shadow-xl -mt-10 md:-mt-16 p-6 md:p-12 border-t border-gray-100 flex flex-col items-center"
-                        initial={{ opacity: 0, y: 50 }}
+                        className="relative bg-white rounded-2xl shadow-sm mt-8 md:mt-6 p-6 md:p-10 border border-gray-100 flex flex-col items-center"
+                        initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: 0.6 }}
                     >
+                        {/* Top accent line */}
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 rounded-t-2xl" />
 
                         {/* Floating Logo */}
                         <motion.div
@@ -118,7 +215,7 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
 
                         {/* Judul & Deskripsi + Sejarah Merged */}
                         <motion.div
-                            className="text-center mt-10 md:mt-16 max-w-4xl mx-auto space-y-6"
+                            className="text-center mt-14 md:mt-20 max-w-4xl mx-auto space-y-6"
                             initial="hidden"
                             animate="visible"
                             variants={containerVariants}
@@ -192,17 +289,20 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.5 }}
                         >
-                            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Visi & Misi</h2>
-                            <div className="w-24 h-1 bg-green-600 mx-auto rounded-full mb-4"></div>
-                            <p className="text-gray-600 max-w-2xl mx-auto">Landasan dan tujuan Yayasan Panti Asuhan Amanah</p>
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-md border border-green-100 mb-3">
+                                Landasan Yayasan
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Visi & Misi</h2>
+                            <div className="w-12 h-0.5 bg-green-600 mx-auto rounded-full mb-3"></div>
+                            <p className="text-gray-500 text-sm max-w-xl mx-auto">Landasan dan tujuan Yayasan Panti Asuhan Amanah</p>
                         </motion.div>
-                        <div className="w-full mt-8 grid md:grid-cols-2 gap-6 md:gap-10">
+                        <div className="w-full mt-6 grid md:grid-cols-2 gap-4">
                             {/* Visi Card */}
                             <motion.div
-                                className="bg-green-50 rounded-2xl p-6 md:p-8 border border-green-100 flex flex-col items-center text-center hover:bg-green-100 transition-colors duration-300"
-                                initial={{ opacity: 0, x: -50 }}
+                                className="relative bg-white rounded-xl p-5 md:p-6 border border-gray-100 flex flex-col items-center text-center hover:border-green-200 transition-all duration-300 overflow-hidden"
+                                initial={{ opacity: 0, x: -30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6 }}
@@ -221,7 +321,7 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
 
                             {/* Misi Card */}
                             <motion.div
-                                className="bg-orange-50 rounded-2xl p-6 md:p-8 border border-orange-100 flex flex-col items-center text-center hover:bg-orange-100 transition-colors duration-300"
+                                className="relative bg-white rounded-xl p-5 md:p-6 border border-gray-100 flex flex-col items-center text-center hover:border-orange-200 transition-all duration-300 overflow-hidden"
                                 initial={{ opacity: 0, x: 50 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
@@ -248,11 +348,11 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                             transition={{ duration: 0.6 }}
                         >
                             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Struktur Pengurus</h2>
-                            <div className="w-24 h-1 bg-green-600 mx-auto rounded-full mb-4"></div>
-                            <p className="text-gray-600 max-w-3xl mx-auto mb-6">
+                            <div className="w-24 h-1 bg-green-600 mx-auto rounded-full mb-3"></div>
+                            <p className="text-gray-600 max-w-3xl mx-auto">
                                 Yayasan Amanah dikelola oleh tim pengurus yang berdedikasi tinggi, amanah, dan profesional di bidangnya.
                             </p>
-                            <div className="max-w-4xl mx-auto">
+                            <div className="max-w-4xl mx-auto -mt-2">
                                 <div className="relative w-full aspect-[4/3]">
                                     <Image
                                         src={profil?.strukturorganisasi_URL || "/struktur organisasi.png"}
@@ -296,7 +396,7 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                             {[
                                 { label: "Anak Asuh", value: profil?.AnakAsuh?.toString() || "0", sub: "Yatim, Piatu, Dhuafa", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
                                 { label: "Jenjang Usia", value: "3 - 17", sub: "Tahun", detail: "SD hingga SMA/SMK", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
-                                { label: "Program Unggulan", value: "3", sub: "Program Utama", detail: "Pendidikan, Tahfidz, Minat Bakat", icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" },
+                                { label: "Program Unggulan", value: "5", sub: "Program Utama", detail: "Pendidikan, Akhlak, Kesehatan, Bakat, Asrama", icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" },
                             ].map((item, index) => (
                                 <motion.div
                                     key={index}

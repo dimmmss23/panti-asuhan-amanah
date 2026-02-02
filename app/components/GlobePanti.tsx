@@ -67,47 +67,100 @@ export default function GlobePanti() {
     if (!mounted) return null;
 
     return (
-        <section className="relative flex flex-col items-center justify-center py-16 min-h-screen md:h-auto bg-gray-50 w-full overflow-hidden">
-            <div className="max-w-7xl mx-auto w-full relative h-full md:h-[40rem] px-4 flex flex-col justify-start md:justify-center z-20">
-                {/* Header Section */}
+        <section className="relative py-16 sm:py-20 bg-white w-full overflow-hidden">
+            <div className="container mx-auto px-4 max-w-6xl">
+                {/* Main Card */}
                 <motion.div
-                    className="text-center relative z-50 flex flex-col items-center"
-                    initial={{ opacity: 0, y: -30 }}
+                    className="relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                        Lokasi Panti Asuhan Amanah
-                    </h2>
-                    <div className="w-24 h-1 bg-green-600 mx-auto rounded-full" />
-                    <p className="text-center text-base md:text-lg font-normal text-neutral-700 max-w-md mt-6 mx-auto mb-8">
-                        Berlokasi di Palembang, Sumatera Selatan. Kami berkomitmen
-                        untuk menebar kebaikan dan kasih sayang ke seluruh penjuru.
-                    </p>
-                </motion.div>
+                    {/* Subtle Top Accent Line */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600" />
 
-                {/* Globe Visualization */}
-                <div className="relative w-full h-[300px] md:h-[400px] z-10 pointer-events-none md:pointer-events-auto transition-opacity duration-500 -mt-10 md:-mt-20">
-                    <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-gray-50 via-gray-50/80 to-transparent z-40 pointer-events-none" />
-                    <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />
-                </div>
-
-                {/* CTA Button */}
-                <div className="relative z-50 mt-12 md:-mt-5 flex justify-center">
-                    <Link href="/kontak" className="inline-block pointer-events-auto">
-                        <motion.button
-                            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full shadow-md cursor-pointer"
-                            whileHover={{
-                                scale: 1.05,
-                                boxShadow: "0px 5px 15px rgba(0,0,0,0.1)",
-                            }}
-                            whileTap={{ scale: 0.95 }}
+                    <div className="relative z-10 p-6 sm:p-10 md:p-12">
+                        {/* Header Section */}
+                        <motion.div
+                            className="text-center relative z-50 flex flex-col items-center"
+                            initial={{ opacity: 0, y: -20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
                         >
-                            Lihat Lokasi Detail
-                        </motion.button>
-                    </Link>
-                </div>
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-md border border-green-100 mb-4">
+                                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
+                                </svg>
+                                Palembang, Sumatera Selatan
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                                Lokasi Panti Asuhan
+                            </h2>
+                            <div className="w-12 h-0.5 bg-green-600 mx-auto rounded-full mb-5" />
+                            <p className="text-center text-sm sm:text-base font-normal text-gray-600 max-w-lg mx-auto">
+                                Kunjungi kami dan lihat langsung kegiatan anak-anak asuh di Panti Asuhan Amanah.
+                            </p>
+                        </motion.div>
+
+                        {/* Globe Visualization */}
+                        <div className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] z-10 pointer-events-none md:pointer-events-auto transition-opacity duration-500 mt-4">
+                            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/80 to-transparent z-40 pointer-events-none" />
+                            <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />
+                        </div>
+
+                        {/* Location Info Cards */}
+                        <motion.div 
+                            className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 mb-8"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                        >
+                            <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-start gap-3 hover:border-green-200 hover:bg-green-50/30 transition-all duration-300">
+                                <div className="w-9 h-9 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 className="text-gray-900 font-semibold text-sm mb-0.5">Lokasi Panti Asuhan Amanah (A)</h4>
+                                    <p className="text-gray-500 text-xs leading-relaxed">2QHM+V3C Pasar Lemabang, Jl. Bambang Utoyo Jl. Pusaka No.76, 3 Ilir, Kec. Ilir Tim. II, Kota Palembang, Sumatera Selatan</p>
+                                </div>
+                            </div>
+                            <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-start gap-3 hover:border-green-200 hover:bg-green-50/30 transition-all duration-300">
+                                <div className="w-9 h-9 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 className="text-gray-900 font-semibold text-sm mb-0.5">Lokasi Panti Asuhan Amanah (B)</h4>
+                                    <p className="text-gray-500 text-xs leading-relaxed">Jl. Lb. Rejo, Sekip Jaya, Kec. Kemuning, Kota Palembang, Sumatera Selatan</p>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* CTA Button */}
+                        <div className="relative z-50 flex justify-center">
+                            <Link href="/kontak" className="inline-block pointer-events-auto">
+                                <motion.button
+                                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-6 rounded-lg shadow-sm hover:shadow cursor-pointer transition-all duration-300 text-sm"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
+                                    Lihat Lokasi Detail
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </motion.button>
+                            </Link>
+                        </div>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

@@ -19,8 +19,8 @@ const Navbar = ({ session, signOutAction }: NavbarProps) => {
         { href: "/", label: "Home" },
         { href: "/profil", label: "Profil" },
         { href: "/program", label: "Program" },
-        { href: "/galeri", label: "Galeri" },
         { href: "/donasi", label: "Donasi" },
+        { href: "/galeri", label: "Galeri" },
         { href: "/kontak", label: "Kontak" },
     ]
 

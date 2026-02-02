@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
 import ThreeGlobe from "three-globe";
-import { useThree, Canvas, extend } from "@react-three/fiber";
+import { useThree, Canvas, extend, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import countries from "@/data/globe.json";
 
@@ -62,9 +62,25 @@ interface WorldProps {
     data: Position[];
 }
 
+// Helper function to convert lat/lng to rotation
+function latLngToRotation(lat: number, lng: number) {
+    // Convert degrees to radians
+    const latRad = lat * (Math.PI / 180);
+    const lngRad = lng * (Math.PI / 180);
+    
+    // Calculate globe rotation to center on the point
+    // Rotate Y axis based on longitude (with offset to face camera)
+    const rotationY = -lngRad - Math.PI / 2;
+    // Tilt based on latitude - negative offset to tilt globe backward
+    // This brings equatorial/southern locations (like Indonesia) more to the center view
+    const rotationX = -0.6; // Tilt globe backward to show Indonesia in center
+    
+    return { rotationX, rotationY };
+}
+
 export function Globe({ globeConfig, data }: WorldProps) {
     const globeRef = useRef<ThreeGlobe | null>(null);
-    const groupRef = useRef(null);
+    const groupRef = useRef<any>(null);
     const [isInitialized, setIsInitialized] = useState(false);
 
     const defaultProps = {
@@ -84,13 +100,25 @@ export function Globe({ globeConfig, data }: WorldProps) {
         ...globeConfig,
     };
 
+    // Set initial rotation to show Palembang
     useEffect(() => {
         if (!globeRef.current && groupRef.current) {
             globeRef.current = new ThreeGlobe();
             (groupRef.current as any).add(globeRef.current);
+            
+            // Set initial rotation to center on Palembang
+            if (globeConfig.initialPosition) {
+                const { rotationX, rotationY } = latLngToRotation(
+                    globeConfig.initialPosition.lat,
+                    globeConfig.initialPosition.lng
+                );
+                groupRef.current.rotation.y = rotationY;
+                groupRef.current.rotation.x = rotationX;
+            }
+            
             setIsInitialized(true);
         }
-    }, []);
+    }, [globeConfig.initialPosition]);
 
     useEffect(() => {
         if (!globeRef.current || !isInitialized) return;
@@ -121,9 +149,18 @@ export function Globe({ globeConfig, data }: WorldProps) {
                 lat: -2.9909,
                 lng: 104.7567,
                 size: defaultProps.pointSize,
-                color: "#22c55e",
+                color: "#ef4444",
                 order: 1,
             },
+        ];
+
+        // Create floating arcs from Palembang to various locations
+        const floatingArcs = [
+            { startLat: -2.9909, startLng: 104.7567, endLat: 10, endLng: 120, arcAlt: 0.3, color: "#ef4444", order: 1 },
+            { startLat: -2.9909, startLng: 104.7567, endLat: -10, endLng: 130, arcAlt: 0.25, color: "#dc2626", order: 2 },
+            { startLat: -2.9909, startLng: 104.7567, endLat: 5, endLng: 95, arcAlt: 0.35, color: "#f87171", order: 3 },
+            { startLat: -2.9909, startLng: 104.7567, endLat: -15, endLng: 110, arcAlt: 0.28, color: "#ef4444", order: 4 },
+            { startLat: -2.9909, startLng: 104.7567, endLat: 15, endLng: 115, arcAlt: 0.32, color: "#dc2626", order: 5 },
         ];
 
         globeRef.current
@@ -136,7 +173,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
             .hexPolygonColor(() => defaultProps.polygonColor);
 
         globeRef.current
-            .arcsData(data)
+            .arcsData(floatingArcs)
             .arcStartLat((d) => (d as { startLat: number }).startLat * 1)
             .arcStartLng((d) => (d as { startLng: number }).startLng * 1)
             .arcEndLat((d) => (d as { endLat: number }).endLat * 1)
@@ -150,15 +187,15 @@ export function Globe({ globeConfig, data }: WorldProps) {
             .arcDashAnimateTime(() => defaultProps.arcTime);
 
         globeRef.current
-            .pointsData(filteredPoints)
+            .pointsData([])
             .pointColor((e) => (e as { color: string }).color)
             .pointsMerge(true)
-            .pointAltitude(0.0)
-            .pointRadius(2);
+            .pointAltitude(0.07)
+            .pointRadius(2.5);
 
         globeRef.current
             .ringsData([])
-            .ringColor(() => defaultProps.polygonColor)
+            .ringColor(() => "#ef4444")
             .ringMaxRadius(defaultProps.maxRings)
             .ringPropagationSpeed(RING_PROPAGATION_SPEED)
             .ringRepeatPeriod(
@@ -200,6 +237,14 @@ export function Globe({ globeConfig, data }: WorldProps) {
         };
     }, [isInitialized, data]);
 
+    // Auto rotate the globe while keeping location visible
+    useFrame(() => {
+        if (groupRef.current && globeConfig.autoRotate) {
+            const speed = globeConfig.autoRotateSpeed || 0.5;
+            groupRef.current.rotation.y += speed * 0.010;
+        }
+    });
+
     return <group ref={groupRef} />;
 }
 
@@ -219,6 +264,9 @@ export default function GlobeViz(props: WorldProps) {
     const { globeConfig } = props;
     const scene = new Scene();
     scene.fog = new Fog(0xffffff, 400, 2000);
+    
+    // Detect mobile
+    const isMobile = typeof window !== "undefined" && /Mobi|Android/i.test(window.navigator.userAgent);
 
     return (
         <Canvas
@@ -244,10 +292,11 @@ export default function GlobeViz(props: WorldProps) {
             <OrbitControls
                 enablePan={false}
                 enableZoom={false}
+                enableRotate={!isMobile}
                 minDistance={cameraZ}
                 maxDistance={cameraZ}
-                autoRotateSpeed={1}
-                autoRotate={true}
+                autoRotateSpeed={0}
+                autoRotate={false}
                 minPolarAngle={Math.PI / 3.5}
                 maxPolarAngle={Math.PI - Math.PI / 3}
             />

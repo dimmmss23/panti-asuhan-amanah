@@ -84,117 +84,150 @@ const LiterasiPondok = () => {
     }, [])
 
     return (
-        <section className="py-16 sm:py-20 bg-gray-50 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Section Title */}
+        <section className="py-16 sm:py-20 bg-white overflow-hidden">
+            <div className="container mx-auto px-4 max-w-6xl">
+                {/* Main Card */}
                 <motion.div
-                    className="text-center mb-12"
-                    initial={{ opacity: 0, y: -30 }}
+                    className="relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                        Mutiara Hikmah
-                    </h2>
-                    <div className="w-24 h-1 bg-green-600 mx-auto rounded-full"></div>
-                </motion.div>
+                    {/* Subtle Top Accent Line */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600" />
 
-                {/* Main Video - Large */}
-                <motion.div
-                    className="mb-8"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <div
-                        className="relative w-full max-w-4xl mx-auto cursor-pointer group"
-                        onClick={() => openModal(mainVideo)}
-                    >
-                        <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black">
-                            {/* Thumbnail */}
-                            <Image
-                                src={mainVideo.thumbnail}
-                                alt={mainVideo.title}
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300" />
+                    <div className="relative z-10 p-6 sm:p-10 md:p-12">
+                        {/* Section Title */}
+                        <motion.div
+                            className="text-center mb-10"
+                            initial={{ opacity: 0, y: -20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                        >
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-md border border-green-100 mb-4">
+                                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                Kajian Islami
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                                Mutiara Hikmah
+                            </h2>
+                            <div className="w-12 h-0.5 bg-green-600 mx-auto rounded-full mb-5"></div>
+                            <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                                Kumpulan video kajian dan nasihat islami untuk menambah wawasan keagamaan serta memotivasi kita dalam berbuat kebaikan.
+                            </p>
+                        </motion.div>
 
-                            {/* Play Button */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-green-700 transition-all duration-300">
-                                    <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M8 5v14l11-7z" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Slider Videos - Smaller Size */}
-                <motion.div
-                    className="relative mt-8"
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                    {/* Videos Slider */}
-                    <div
-                        ref={sliderRef}
-                        className="flex sm:grid sm:grid-cols-3 gap-3 sm:gap-4 overflow-x-auto sm:overflow-visible scroll-smooth pb-4 sm:pb-0 max-w-5xl mx-auto"
-                        style={{
-                            scrollbarWidth: 'none',
-                            msOverflowStyle: 'none',
-                            WebkitOverflowScrolling: 'touch'
-                        }}
-                    >
-                        <style jsx>{`
-                            div::-webkit-scrollbar {
-                                display: none;
-                            }
-                        `}</style>
-                        {sliderVideos.map((video) => (
+                        {/* Main Video - Large */}
+                        <motion.div
+                            className="mb-6"
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                        >
                             <div
-                                key={video.id}
-                                className="flex-shrink-0 w-[220px] sm:w-full cursor-pointer group/card"
-                                onClick={() => openModal(video)}
+                                className="relative w-full max-w-4xl mx-auto cursor-pointer group"
+                                onClick={() => openModal(mainVideo)}
                             >
-                                <div className="relative aspect-video rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 bg-black">
+                                <div className="relative aspect-video rounded-xl overflow-hidden shadow-md bg-gray-900 border border-gray-200">
                                     {/* Thumbnail */}
                                     <Image
-                                        src={video.thumbnail}
-                                        alt={video.title}
+                                        src={mainVideo.thumbnail}
+                                        alt={mainVideo.title}
                                         fill
-                                        className="object-cover group-hover/card:scale-105 transition-transform duration-300"
+                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <div className="absolute inset-0 bg-black/20 group-hover/card:bg-black/40 transition-colors duration-300" />
+                                    {/* Overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-colors duration-300" />
 
                                     {/* Play Button */}
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600 rounded-full flex items-center justify-center shadow-lg opacity-90 group-hover/card:opacity-100 group-hover/card:scale-110 group-hover/card:bg-green-700 transition-all duration-300">
+                                        <motion.div 
+                                            className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600/90 rounded-full flex items-center justify-center shadow-lg group-hover/card:bg-green-600 group-hover/card:scale-110 transition-all duration-300"
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.95 }}
+                                        >
                                             <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M8 5v14l11-7z" />
                                             </svg>
-                                        </div>
+                                        </motion.div>
+                                    </div>
+
+                                    {/* Video Title Overlay */}
+                                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                                        <h3 className="text-white font-bold text-sm sm:text-lg line-clamp-2">{mainVideo.title}</h3>
                                     </div>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        </motion.div>
 
-                    {/* Scroll Progress Bar - Mobile Only */}
-                    <div className="mt-6 sm:hidden max-w-5xl mx-auto">
-                        <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                        {/* Slider Videos - Smaller Size */}
+                        <motion.div
+                            className="relative mt-6"
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                        >
+                            {/* Videos Slider */}
                             <div
-                                className="h-full bg-green-600 rounded-full transition-all duration-300 ease-out"
-                                style={{ width: `${33.33 + (scrollProgress * 0.6667)}%` }}
-                            />
-                        </div>
+                                ref={sliderRef}
+                                className="flex sm:grid sm:grid-cols-3 gap-3 sm:gap-4 overflow-x-auto sm:overflow-visible scroll-smooth pb-4 sm:pb-0 max-w-4xl mx-auto"
+                                style={{
+                                    scrollbarWidth: 'none',
+                                    msOverflowStyle: 'none',
+                                    WebkitOverflowScrolling: 'touch'
+                                }}
+                            >
+                                <style jsx>{`
+                                    div::-webkit-scrollbar {
+                                        display: none;
+                                    }
+                                `}</style>
+                                {sliderVideos.map((video) => (
+                                    <motion.div
+                                        key={video.id}
+                                        className="flex-shrink-0 w-[200px] sm:w-full cursor-pointer group/card"
+                                        onClick={() => openModal(video)}
+                                        whileHover={{ y: -5 }}
+                                    >
+                                        <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-black ring-2 ring-white/30 hover:ring-green-400/50">
+                                            {/* Thumbnail */}
+                                            <Image
+                                                src={video.thumbnail}
+                                                alt={video.title}
+                                                fill
+                                                className="object-cover group-hover/card:scale-105 transition-transform duration-500"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover/card:from-black/70 transition-colors duration-300" />
+
+                                            {/* Play Button */}
+                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600/90 rounded-full flex items-center justify-center shadow-lg group-hover/card:bg-green-600 group-hover/card:scale-110 transition-all duration-300">
+                                                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            {/* Scroll Progress Bar - Mobile Only */}
+                            <div className="mt-6 sm:hidden max-w-4xl mx-auto">
+                                <div className="w-full h-1.5 bg-green-100 rounded-full overflow-hidden">
+                                    <div
+                                        className="h-full bg-green-600 rounded-full transition-all duration-300 ease-out"
+                                        style={{ width: `${33.33 + (scrollProgress * 0.6667)}%` }}
+                                    />
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
                 </motion.div>
             </div>

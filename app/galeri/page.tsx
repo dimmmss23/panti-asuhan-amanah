@@ -40,15 +40,71 @@ const GaleriPage = () => {
             <Navbar />
 
             <main className="flex-1 pt-16">
-                {/* Hero Section */}
-                <section className="bg-gradient-to-br from-green-800 to-green-900 py-16 sm:py-20">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-                            Galeri Kegiatan
-                        </h1>
-                        <p className="text-green-100 text-lg sm:text-xl max-w-2xl mx-auto">
-                            Dokumentasi kegiatan dan momen berharga di Panti Asuhan Amanah
-                        </p>
+                {/* Hero Section - Islamic Elegant Theme */}
+                <section className="relative w-full py-20 md:py-28 overflow-hidden bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800">
+                    {/* Islamic Geometric Pattern Overlay */}
+                    <div className="absolute inset-0 opacity-10">
+                        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="islamic-pattern-galeri" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                                    <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="white" strokeWidth="1"/>
+                                    <circle cx="30" cy="30" r="15" fill="none" stroke="white" strokeWidth="1"/>
+                                    <circle cx="30" cy="30" r="8" fill="none" stroke="white" strokeWidth="1"/>
+                                    <path d="M30 15L45 30L30 45L15 30Z" fill="none" stroke="white" strokeWidth="0.5"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#islamic-pattern-galeri)"/>
+                        </svg>
+                    </div>
+                    
+                    {/* Decorative Glow Effects */}
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-400/20 rounded-full blur-3xl" />
+                    
+                    {/* Gold Accent Lines */}
+                    <div className="absolute top-10 left-0 right-0 flex justify-center">
+                        <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
+                    </div>
+                    <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+                        <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+                        <div className="text-center max-w-3xl mx-auto">
+                            {/* Decorative Icon */}
+                            <div className="flex justify-center mb-6">
+                                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                                    <svg className="w-8 h-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            {/* Title */}
+                            <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4">
+                                Galeri Kegiatan
+                            </h1>
+                            
+                            {/* Decorative Divider */}
+                            <div className="flex items-center justify-center gap-3 mb-6">
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-400/70" />
+                                <div className="w-2 h-2 bg-amber-400 rounded-full" />
+                                <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-400/70" />
+                            </div>
+                            
+                            {/* Description */}
+                            <p className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed">
+                                Dokumentasi kegiatan dan momen berharga di Panti Asuhan Amanah
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Bottom Wave */}
+                    <div className="absolute bottom-0 left-0 right-0">
+                        <svg className="w-full h-12 md:h-16" viewBox="0 0 1440 54" fill="none" preserveAspectRatio="none">
+                            <path d="M0 22L60 16.7C120 11 240 1 360 0.3C480 0 600 11 720 16.7C840 22 960 22 1080 19.3C1200 16 1320 11 1380 8.3L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z" fill="#f9fafb"/>
+                        </svg>
                     </div>
                 </section>
 
