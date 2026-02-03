@@ -27,6 +27,7 @@ const Navbar = ({ session, signOutAction }: NavbarProps) => {
     const adminNavLinks = [
         { href: "/dashboard", label: "Dashboard" },
         { href: "/dashboard/profil", label: "Profil" },
+        { href: "/dashboard/donasi", label: "Donasi" },
         { href: "/dashboard/gallery", label: "Galeri" },
     ]
 

@@ -52,3 +52,40 @@ model Legalitas {
 
   @@map("legalitas")
 }
+
+model Donasi {
+  id            Int      @id @default(autoincrement())
+  namaBank      String
+  nomorRekening String
+  atasNama      String
+  logoUrl       String
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("donasi")
+}
+
+model Qris {
+  id        Int      @id @default(autoincrement())
+  nama      String   @default("QRIS Donasi")
+  imageUrl  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("qris")
+}
+
+model KitaBisa {
+  id           Int      @id @default(autoincrement())
+  namaProgram  String
+  deskripsi    String
+  imageUrl     String
+  linkKitaBisa String
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@map("kitabisa")
+}

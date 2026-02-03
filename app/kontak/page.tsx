@@ -147,7 +147,6 @@ export default function ContactPage() {
 
                     {/* Location A */}
                     <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
-                        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-500 hidden md:block" />
                         <div className="p-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start gap-3">
                             <div>
                                 <h3 className="font-semibold text-gray-900 text-sm">Panti Asuhan Amanah (A)</h3>
@@ -186,7 +185,6 @@ export default function ContactPage() {
 
                     {/* Location B */}
                     <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
-                        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 hidden md:block" />
                         <div className="p-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start gap-3">
                             <div>
                                 <h3 className="font-semibold text-gray-900 text-sm">Panti Asuhan Amanah (B)</h3>
