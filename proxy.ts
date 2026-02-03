@@ -12,8 +12,8 @@ export default auth((req) => {
         }
     }
 
-    // Redirect ke dashboard jika sudah login dan akses halaman login/register
-    if (pathname === "/login" || pathname === "/register") {
+    // Redirect ke dashboard jika sudah login dan akses halaman login
+    if (pathname === "/login") {
         if (isLoggedIn) {
             return NextResponse.redirect(new URL("/dashboard", req.url))
         }
@@ -23,5 +23,5 @@ export default auth((req) => {
 })
 
 export const config = {
-    matcher: ["/dashboard/:path*", "/login", "/register"]
+    matcher: ["/dashboard/:path*", "/login"]
 }

@@ -3,8 +3,14 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
+const poppins = Poppins({
+    weight: ["400", "600", "700"],
+    subsets: ["latin"]
+});
 
 interface Donasi {
     id: number;
@@ -72,26 +78,26 @@ const DonationPage = () => {
 
             <main className="flex-grow pb-12">
                 {/* Hero Section - Islamic Elegant Theme */}
-                <section className="relative w-full py-20 md:py-28 overflow-hidden bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800 mb-8 md:mb-12">
+                <section className="relative w-full pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800 mb-8 md:mb-12">
                     {/* Islamic Geometric Pattern Overlay */}
                     <div className="absolute inset-0 opacity-10">
                         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <pattern id="islamic-pattern-donasi" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-                                    <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="white" strokeWidth="1"/>
-                                    <circle cx="30" cy="30" r="15" fill="none" stroke="white" strokeWidth="1"/>
-                                    <circle cx="30" cy="30" r="8" fill="none" stroke="white" strokeWidth="1"/>
-                                    <path d="M30 15L45 30L30 45L15 30Z" fill="none" stroke="white" strokeWidth="0.5"/>
+                                    <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="white" strokeWidth="1" />
+                                    <circle cx="30" cy="30" r="15" fill="none" stroke="white" strokeWidth="1" />
+                                    <circle cx="30" cy="30" r="8" fill="none" stroke="white" strokeWidth="1" />
+                                    <path d="M30 15L45 30L30 45L15 30Z" fill="none" stroke="white" strokeWidth="0.5" />
                                 </pattern>
                             </defs>
-                            <rect width="100%" height="100%" fill="url(#islamic-pattern-donasi)"/>
+                            <rect width="100%" height="100%" fill="url(#islamic-pattern-donasi)" />
                         </svg>
                     </div>
-                    
+
                     {/* Decorative Glow Effects */}
                     <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl" />
                     <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-400/20 rounded-full blur-3xl" />
-                    
+
                     {/* Gold Accent Lines */}
                     <div className="absolute top-10 left-0 right-0 flex justify-center">
                         <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
@@ -104,7 +110,7 @@ const DonationPage = () => {
                     <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
                         <div className="text-center max-w-3xl mx-auto">
                             {/* Decorative Icon */}
-                            <motion.div 
+                            <motion.div
                                 className="flex justify-center mb-6"
                                 initial={{ scale: 0, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
@@ -116,9 +122,9 @@ const DonationPage = () => {
                                     </svg>
                                 </div>
                             </motion.div>
-                            
+
                             {/* Title */}
-                            <motion.h1 
+                            <motion.h1
                                 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -126,9 +132,9 @@ const DonationPage = () => {
                             >
                                 Salurkan Kebaikan Anda
                             </motion.h1>
-                            
+
                             {/* Decorative Divider */}
-                            <motion.div 
+                            <motion.div
                                 className="flex items-center justify-center gap-3 mb-6"
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
@@ -138,9 +144,9 @@ const DonationPage = () => {
                                 <div className="w-2 h-2 bg-amber-400 rounded-full" />
                                 <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-400/70" />
                             </motion.div>
-                            
+
                             {/* Description */}
-                            <motion.p 
+                            <motion.p
                                 className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -154,7 +160,7 @@ const DonationPage = () => {
                     {/* Bottom Wave */}
                     <div className="absolute bottom-0 left-0 right-0">
                         <svg className="w-full h-12 md:h-16" viewBox="0 0 1440 54" fill="none" preserveAspectRatio="none">
-                            <path d="M0 22L60 16.7C120 11 240 1 360 0.3C480 0 600 11 720 16.7C840 22 960 22 1080 19.3C1200 16 1320 11 1380 8.3L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z" fill="#f9fafb"/>
+                            <path d="M0 22L60 16.7C120 11 240 1 360 0.3C480 0 600 11 720 16.7C840 22 960 22 1080 19.3C1200 16 1320 11 1380 8.3L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z" fill="#f9fafb" />
                         </svg>
                     </div>
                 </section>
@@ -278,7 +284,7 @@ const DonationPage = () => {
                                                 {/* Account Number */}
                                                 <div className="bg-blue-50/50 py-4 px-5 rounded-xl border border-blue-100 text-center">
                                                     <p className="text-xs text-gray-500 mb-2">Nomor Rekening</p>
-                                                    <p className="font-mono text-2xl font-bold text-blue-900 tracking-wider mb-3">
+                                                    <p className={`${poppins.className} text-2xl font-bold text-blue-900 tracking-wider mb-3`}>
                                                         {bank.nomorRekening}
                                                     </p>
                                                     <button

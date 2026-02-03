@@ -10,7 +10,7 @@ const Page = () => {
   return (
     <div>
       <Navbar />
-      <main className="pt-14">
+      <main className="pt-24 md:pt-28">
         <Hero />
         <MutiaraHikmah />
         <Profil />

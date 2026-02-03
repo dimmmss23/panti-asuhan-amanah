@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
+import Image from "next/image"
 
 const LoginPage = () => {
     const router = useRouter()
@@ -43,7 +43,7 @@ const LoginPage = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 relative">
             {/* Back Button */}
-            <Link 
+            <a 
                 href="/"
                 className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition duration-200 group"
             >
@@ -61,9 +61,20 @@ const LoginPage = () => {
                     />
                 </svg>
                 <span className="text-sm sm:text-base font-medium">Kembali</span>
-            </Link>
+            </a>
 
             <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-2xl">
+                {/* Logo */}
+                <div className="flex justify-center">
+                    <Image 
+                        src="/Logo.png" 
+                        alt="Logo Panti" 
+                        width={120} 
+                        height={120}
+                        className="object-contain"
+                    />
+                </div>
+
                 {/* Header */}
                 <div className="text-center">
                     <h2 className="text-3xl font-bold text-gray-900">
@@ -115,25 +126,17 @@ const LoginPage = () => {
                         </div>
                     </div>
 
-                    {/* Remember Me & Forgot Password */}
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                            <input
-                                id="remember-me"
-                                name="remember-me"
-                                type="checkbox"
-                                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded cursor-pointer"
-                            />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 cursor-pointer">
-                                Ingat saya
-                            </label>
-                        </div>
-
-                        <div className="text-sm">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 transition duration-200">
-                                Lupa password?
-                            </a>
-                        </div>
+                    {/* Remember Me */}
+                    <div className="flex items-center">
+                        <input
+                            id="remember-me"
+                            name="remember-me"
+                            type="checkbox"
+                            className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded cursor-pointer"
+                        />
+                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 cursor-pointer">
+                            Ingat saya
+                        </label>
                     </div>
 
                     {/* Submit Button */}
@@ -147,15 +150,6 @@ const LoginPage = () => {
                         </button>
                     </div>
 
-                    {/* Sign Up Link */}
-                    <div className="text-center">
-                        <p className="text-sm text-gray-600">
-                            Belum punya akun?{' '}
-                            <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-500 transition duration-200">
-                                Daftar sekarang
-                            </Link>
-                        </p>
-                    </div>
                 </form>
             </div>
         </div>

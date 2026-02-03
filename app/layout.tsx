@@ -3,6 +3,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
 
+import NextTopLoader from "nextjs-toploader";
+
 const queryClient = new QueryClient()
 
 export default function RootLayout({
@@ -18,6 +20,17 @@ export default function RootLayout({
         <meta name="keywords" content="panti asuhan, yayasan amanah, palembang, donasi, anak yatim, rumah tahfidz" />
       </head>
       <body className="overflow-x-hidden">
+        <NextTopLoader
+          color="#10B981"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #10B981,0 0 5px #10B981"
+        />
         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
       </body>
     </html>

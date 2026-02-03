@@ -112,53 +112,33 @@ const Hero = () => {
             </section>
 
             {/* Hero Donasi Section - Attractive Design */}
-            <motion.section
+            <section
                 className="w-full bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 relative overflow-hidden"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
             >
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-10">
-                    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <pattern id="hero-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                                <circle cx="20" cy="20" r="2" fill="white"/>
-                            </pattern>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#hero-pattern)"/>
-                    </svg>
+                {/* Background Pattern - Simplified */}
+                <div className="absolute inset-0 opacity-5">
+                    <div className="w-full h-full" style={{ 
+                        backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+                        backgroundSize: '40px 40px'
+                    }} />
                 </div>
 
-                {/* Decorative Circles */}
-                <div className="absolute -left-20 -top-20 w-64 h-64 bg-green-500/30 rounded-full blur-3xl" />
-                <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-400/30 rounded-full blur-3xl" />
+                {/* Decorative Circles - Removed blur for better performance */}
+                <div className="absolute -left-20 -top-20 w-64 h-64 bg-green-500/20 rounded-full" />
+                <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-400/20 rounded-full" />
 
                 <div className="container mx-auto px-3 py-4 sm:py-6 md:py-10 relative z-10">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
                         {/* Text Content */}
-                        <motion.div 
-                            className="flex-1 text-center md:text-left"
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2, duration: 0.6 }}
-                        >
-                            <motion.div
-                                className="inline-block mb-2 px-3 py-1 bg-amber-400/20 backdrop-blur-sm rounded-full border border-amber-400/30"
-                                initial={{ scale: 0 }}
-                                whileInView={{ scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3, type: "spring" }}
-                            >
+                        <div className="flex-1 text-center md:text-left">
+                            <div className="inline-block mb-2 px-3 py-1 bg-amber-400/20 backdrop-blur-sm rounded-full border border-amber-400/30">
                                 <span className="text-amber-200 text-xs font-medium flex items-center gap-1.5">
                                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                                     </svg>
                                     Berbagi Kebaikan
                                 </span>
-                            </motion.div>
+                            </div>
 
                             <h2 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-white mb-2 sm:mb-3 leading-tight">
                                 Awali Harimu dengan{" "}
@@ -207,27 +187,20 @@ const Hero = () => {
                                     Terdaftar Resmi
                                 </span>
                             </div>
-                        </motion.div>
+                        </div>
 
                         {/* Cartoon Illustration */}
-                        <motion.div 
-                            className="flex-shrink-0 relative"
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4, duration: 0.6 }}
-                        >
-                            {/* Glow Effect Behind Character */}
-                            <div className="absolute inset-0 bg-amber-400/20 rounded-full blur-3xl scale-75" />
+                        <div className="flex-shrink-0 relative">
+                            {/* Glow Effect Behind Character - Removed blur */}
+                            <div className="absolute inset-0 bg-amber-400/10 rounded-full scale-75" />
                             
                             {/* Cartoon SVG Illustration */}
-                            <motion.svg 
+                            <svg 
                                 className="w-28 h-28 sm:w-40 sm:h-40 md:w-52 md:h-52 relative z-10"
                                 viewBox="0 0 300 300" 
                                 fill="none" 
                                 xmlns="http://www.w3.org/2000/svg"
-                                animate={{ y: [0, -10, 0] }}
-                                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                                style={{ animation: 'float 3s ease-in-out infinite' }}
                             >
                                 {/* Background Circle */}
                                 <circle cx="150" cy="150" r="120" fill="#FCD34D" fillOpacity="0.3"/>
@@ -279,38 +252,45 @@ const Hero = () => {
                                 <rect x="212" y="160" width="16" height="25" rx="2" fill="#60A5FA"/>
                                 
                                 {/* Donation Icon floating */}
-                                <motion.g
-                                    animate={{ y: [0, -5, 0], scale: [1, 1.1, 1] }}
-                                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                                >
+                                <g style={{ animation: 'pulse 2s ease-in-out infinite' }}>
                                     <circle cx="70" cy="100" r="25" fill="#10B981"/>
                                     <path d="M60 100 L70 90 L80 100 L70 110 Z" fill="white"/>
                                     <circle cx="70" cy="100" r="8" fill="#10B981"/>
                                     <path d="M66 100 Q70 96 74 100 Q70 104 66 100" fill="#FDE68A"/>
-                                </motion.g>
+                                </g>
                                 
                                 {/* Love Heart floating */}
-                                <motion.g
-                                    animate={{ y: [0, -8, 0], x: [0, 3, 0] }}
-                                    transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 0.5 }}
-                                >
+                                <g style={{ animation: 'pulse 2.5s ease-in-out infinite' }}>
                                     <path d="M240 80 C240 70 250 65 255 75 C260 65 270 70 270 80 C270 95 255 105 255 105 C255 105 240 95 240 80Z" fill="#EF4444"/>
-                                </motion.g>
+                                </g>
                                 
                                 {/* Sparkles */}
-                                <motion.g
-                                    animate={{ opacity: [0.5, 1, 0.5], scale: [0.8, 1.2, 0.8] }}
-                                    transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                                >
+                                <g style={{ animation: 'twinkle 1.5s ease-in-out infinite' }}>
                                     <path d="M50 150 L55 145 L60 150 L55 155 Z" fill="#FCD34D"/>
                                     <path d="M250 130 L253 125 L256 130 L253 135 Z" fill="#FCD34D"/>
                                     <path d="M90 60 L93 55 L96 60 L93 65 Z" fill="#FCD34D"/>
-                                </motion.g>
-                            </motion.svg>
-                        </motion.div>
+                                </g>
+                            </svg>
+
+                            {/* CSS Animations - More performant than Framer Motion */}
+                            <style jsx>{`
+                                @keyframes float {
+                                    0%, 100% { transform: translateY(0); }
+                                    50% { transform: translateY(-10px); }
+                                }
+                                @keyframes pulse {
+                                    0%, 100% { opacity: 0.7; transform: scale(1); }
+                                    50% { opacity: 1; transform: scale(1.05); }
+                                }
+                                @keyframes twinkle {
+                                    0%, 100% { opacity: 0.5; }
+                                    50% { opacity: 1; }
+                                }
+                            `}</style>
+                        </div>
                     </div>
                 </div>
-            </motion.section>
+            </section>
         </>
     )
 }

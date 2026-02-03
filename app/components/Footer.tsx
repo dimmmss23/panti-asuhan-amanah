@@ -120,15 +120,28 @@ const Footer = () => {
                     <motion.div variants={itemVariants}>
                         <h3 className="text-yellow-400 font-bold text-lg mb-4">Jam Operasional</h3>
                         <div className="space-y-3">
+                            {/* Jam Operasional Anak Panti */}
                             <div className="flex items-center gap-3 p-3 bg-green-800/50 rounded-lg">
                                 <svg className="w-5 h-5 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 <div>
-                                    <p className="text-gray-300 text-sm font-medium">Senin - Minggu</p>
-                                    <p className="text-yellow-400 text-sm font-semibold">08:00 - 17:00 WIB</p>
+                                    <p className="text-gray-300 text-sm font-medium">Anak Panti</p>
+                                    <p className="text-yellow-400 text-sm font-semibold">05:00 - 20:00 WIB</p>
                                 </div>
                             </div>
+
+                            {/* Jam Operasional Panti */}
+                            <div className="flex items-center gap-3 p-3 bg-green-800/50 rounded-lg">
+                                <svg className="w-5 h-5 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                                <div>
+                                    <p className="text-gray-300 text-sm font-medium">Layanan Panti</p>
+                                    <p className="text-yellow-400 text-sm font-semibold">Siap 24 Jam</p>
+                                </div>
+                            </div>
+
                             <p className="text-gray-400 text-xs italic leading-relaxed">
                                 * Kunjungan di luar jam operasional dapat diatur dengan perjanjian terlebih dahulu melalui WhatsApp.
                             </p>

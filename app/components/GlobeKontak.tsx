@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
 import type { GlobeConfig } from "./GlobeViz";
 
 // Dynamic import untuk GlobeViz (client-side only)
@@ -68,16 +67,10 @@ export default function GlobeKontak() {
         <section className="w-full">
             <div className="relative w-full flex flex-col items-center">
                 {/* Header Section */}
-                <motion.div
-                    className="text-center relative z-10 flex flex-col items-center"
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                >
+                <div className="text-center relative z-10 flex flex-col items-center">
                     <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-green-100 text-green-700 text-sm font-semibold rounded-full mb-4">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                         </svg>
                         Palembang, Sumatera Selatan
                     </span>
@@ -88,7 +81,7 @@ export default function GlobeKontak() {
                     <p className="text-center text-sm md:text-base font-normal text-gray-600 max-w-md mt-4 mx-auto">
                         Kunjungi kami dan lihat langsung kegiatan anak-anak asuh di Panti Asuhan Amanah.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Globe Visualization */}
                 <div className="relative w-full h-[280px] md:h-[320px] z-0 pointer-events-none md:pointer-events-auto transition-opacity duration-500 mt-2">

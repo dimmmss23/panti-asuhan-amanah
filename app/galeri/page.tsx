@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
+import { motion } from "framer-motion"
 import Navbar from "@/app/components/Navbar"
 import Footer from "@/app/components/Footer"
 
@@ -34,76 +35,132 @@ const GaleriPage = () => {
         })
     }
 
+    // Animation Variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+            }
+        }
+    }
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    }
+
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    }
 
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />
 
-            <main className="flex-1 pt-16">
+            <main className="flex-1 pt-0">
                 {/* Hero Section - Islamic Elegant Theme */}
-                <section className="relative w-full py-20 md:py-28 overflow-hidden bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800">
+                <section className="relative w-full pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800">
                     {/* Islamic Geometric Pattern Overlay */}
-                    <div className="absolute inset-0 opacity-10">
+                    <motion.div
+                        className="absolute inset-0 opacity-10"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.1 }}
+                        transition={{ duration: 1.5 }}
+                    >
                         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <pattern id="islamic-pattern-galeri" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-                                    <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="white" strokeWidth="1"/>
-                                    <circle cx="30" cy="30" r="15" fill="none" stroke="white" strokeWidth="1"/>
-                                    <circle cx="30" cy="30" r="8" fill="none" stroke="white" strokeWidth="1"/>
-                                    <path d="M30 15L45 30L30 45L15 30Z" fill="none" stroke="white" strokeWidth="0.5"/>
+                                    <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="white" strokeWidth="1" />
+                                    <circle cx="30" cy="30" r="15" fill="none" stroke="white" strokeWidth="1" />
+                                    <circle cx="30" cy="30" r="8" fill="none" stroke="white" strokeWidth="1" />
+                                    <path d="M30 15L45 30L30 45L15 30Z" fill="none" stroke="white" strokeWidth="0.5" />
                                 </pattern>
                             </defs>
-                            <rect width="100%" height="100%" fill="url(#islamic-pattern-galeri)"/>
+                            <rect width="100%" height="100%" fill="url(#islamic-pattern-galeri)" />
                         </svg>
-                    </div>
-                    
+                    </motion.div>
+
                     {/* Decorative Glow Effects */}
                     <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl" />
                     <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-400/20 rounded-full blur-3xl" />
-                    
+
                     {/* Gold Accent Lines */}
-                    <div className="absolute top-10 left-0 right-0 flex justify-center">
+                    <motion.div
+                        className="absolute top-10 left-0 right-0 flex justify-center"
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: "100%", opacity: 1 }}
+                        transition={{ duration: 1 }}
+                    >
                         <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
-                    </div>
-                    <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+                    </motion.div>
+                    <motion.div
+                        className="absolute bottom-10 left-0 right-0 flex justify-center"
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: "100%", opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                    >
                         <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
-                    </div>
+                    </motion.div>
 
                     {/* Content */}
                     <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
                         <div className="text-center max-w-3xl mx-auto">
                             {/* Decorative Icon */}
-                            <div className="flex justify-center mb-6">
+                            <motion.div
+                                className="flex justify-center mb-6"
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ duration: 0.5, type: "spring" }}
+                            >
                                 <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
                                     <svg className="w-8 h-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                            </div>
-                            
+                            </motion.div>
+
                             {/* Title */}
-                            <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4">
+                            <motion.h1
+                                className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4"
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.3, duration: 0.5 }}
+                            >
                                 Galeri Kegiatan
-                            </h1>
-                            
+                            </motion.h1>
+
                             {/* Decorative Divider */}
-                            <div className="flex items-center justify-center gap-3 mb-6">
+                            <motion.div
+                                className="flex items-center justify-center gap-3 mb-6"
+                                initial={{ scaleX: 0 }}
+                                animate={{ scaleX: 1 }}
+                                transition={{ delay: 0.5, duration: 0.5 }}
+                            >
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-400/70" />
                                 <div className="w-2 h-2 bg-amber-400 rounded-full" />
                                 <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-400/70" />
-                            </div>
-                            
+                            </motion.div>
+
                             {/* Description */}
-                            <p className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed">
+                            <motion.p
+                                className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed"
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.6, duration: 0.6 }}
+                            >
                                 Dokumentasi kegiatan dan momen berharga di Panti Asuhan Amanah
-                            </p>
+                            </motion.p>
                         </div>
                     </div>
 
                     {/* Bottom Wave */}
                     <div className="absolute bottom-0 left-0 right-0">
                         <svg className="w-full h-12 md:h-16" viewBox="0 0 1440 54" fill="none" preserveAspectRatio="none">
-                            <path d="M0 22L60 16.7C120 11 240 1 360 0.3C480 0 600 11 720 16.7C840 22 960 22 1080 19.3C1200 16 1320 11 1380 8.3L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z" fill="#f9fafb"/>
+                            <path d="M0 22L60 16.7C120 11 240 1 360 0.3C480 0 600 11 720 16.7C840 22 960 22 1080 19.3C1200 16 1320 11 1380 8.3L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z" fill="#f9fafb" />
                         </svg>
                     </div>
                 </section>
@@ -119,19 +176,30 @@ const GaleriPage = () => {
                                 </div>
                             </div>
                         ) : error ? (
-                            <div className="text-center py-12">
+                            <motion.div
+                                className="text-center py-12"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                            >
                                 <svg className="w-16 h-16 mx-auto text-red-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                 </svg>
                                 <p className="text-red-500 text-lg">Gagal memuat galeri</p>
                                 <p className="text-gray-500 mt-2">Silakan coba lagi nanti</p>
-                            </div>
+                            </motion.div>
                         ) : galleries && galleries.length > 0 ? (
-                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                            <motion.div
+                                className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+                                variants={containerVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-100px" }}
+                            >
                                 {galleries.map((gallery) => (
-                                    <article
+                                    <motion.article
                                         key={gallery.id}
                                         className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col"
+                                        variants={itemVariants}
                                     >
                                         {/* Image Container */}
                                         <Link
@@ -191,9 +259,9 @@ const GaleriPage = () => {
                                                 </svg>
                                             </Link>
                                         </div>
-                                    </article>
+                                    </motion.article>
                                 ))}
-                            </div>
+                            </motion.div>
                         ) : (
                             <div className="text-center py-16">
                                 <svg className="w-20 h-20 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,7 +277,13 @@ const GaleriPage = () => {
                 {/* Info Section */}
                 <section className="py-12 sm:py-16 bg-white">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 sm:p-12">
+                        <motion.div
+                            className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 sm:p-12"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
                             <div className="flex flex-col md:flex-row items-center gap-8">
                                 <div className="flex-shrink-0">
                                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
@@ -226,18 +300,20 @@ const GaleriPage = () => {
                                     <p className="text-gray-600 mb-4">
                                         Ingin berkontribusi dengan mengirimkan foto kegiatan? Hubungi kami melalui kontak yang tersedia.
                                     </p>
-                                    <a
+                                    <motion.a
                                         href="/kontak"
                                         className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                     >
                                         Hubungi Kami
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                         </svg>
-                                    </a>
+                                    </motion.a>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </section>
             </main>

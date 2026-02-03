@@ -29,8 +29,6 @@ const PALEMBANG_COORDS = {
     lng: 104.7567,
 };
 
-// Konfigurasi tampilan globe
-const isMobile = typeof window !== "undefined" && /Mobi|Android/i.test(window.navigator.userAgent);
 const GLOBE_CONFIG: GlobeConfig = {
     pointSize: 4,
     globeColor: "#ffffff",
@@ -51,7 +49,7 @@ const GLOBE_CONFIG: GlobeConfig = {
     maxRings: 3,
     initialPosition: PALEMBANG_COORDS,
     autoRotate: true,
-    autoRotateSpeed: isMobile ? 2 : 0.5,
+    autoRotateSpeed: 0.5,
 };
 
 // Data arcs kosong (hanya menampilkan satu titik lokasi)
