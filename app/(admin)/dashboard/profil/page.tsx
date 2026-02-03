@@ -301,6 +301,7 @@ const ProfilPage = () => {
                                         src={data.profil.strukturorganisasi_URL}
                                         alt="Struktur Organisasi"
                                         fill
+                                        sizes="(max-width: 768px) 100vw, 50vw"
                                         className="object-contain"
                                     />
                                 </div>
@@ -404,6 +405,7 @@ const ProfilPage = () => {
                                             src={previewUrl}
                                             alt="Preview"
                                             fill
+                                            sizes="(max-width: 768px) 100vw, 500px"
                                             className="object-contain"
                                         />
                                     </div>

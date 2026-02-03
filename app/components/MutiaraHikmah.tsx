@@ -108,7 +108,7 @@ const LiterasiPondok = () => {
                         >
                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-md border border-green-100 mb-4">
                                 <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
                                 Kajian Islami
                             </span>
@@ -139,6 +139,7 @@ const LiterasiPondok = () => {
                                         src={mainVideo.thumbnail}
                                         alt={mainVideo.title}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, 896px"
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
                                     {/* Overlay */}
@@ -146,7 +147,7 @@ const LiterasiPondok = () => {
 
                                     {/* Play Button */}
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <motion.div 
+                                        <motion.div
                                             className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600/90 rounded-full flex items-center justify-center shadow-lg group-hover/card:bg-green-600 group-hover/card:scale-110 transition-all duration-300"
                                             whileHover={{ scale: 1.1 }}
                                             whileTap={{ scale: 0.95 }}
@@ -201,6 +202,7 @@ const LiterasiPondok = () => {
                                                 src={video.thumbnail}
                                                 alt={video.title}
                                                 fill
+                                                sizes="200px"
                                                 className="object-cover group-hover/card:scale-105 transition-transform duration-500"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover/card:from-black/70 transition-colors duration-300" />

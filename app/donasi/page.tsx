@@ -217,6 +217,7 @@ const DonationPage = () => {
                                                     src={item.imageUrl}
                                                     alt={item.namaProgram}
                                                     fill
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                     className="object-cover"
                                                 />
                                             </div>
@@ -272,6 +273,7 @@ const DonationPage = () => {
                                                             src={bank.logoUrl}
                                                             alt={bank.namaBank}
                                                             fill
+                                                            sizes="200px"
                                                             className="object-contain p-2"
                                                         />
                                                     </div>
@@ -346,6 +348,7 @@ const DonationPage = () => {
                                                         src={qris.imageUrl}
                                                         alt={qris.nama}
                                                         fill
+                                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                         className="object-contain p-2"
                                                     />
                                                 </div>

@@ -83,6 +83,7 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                             src="/Hero Profil.png"
                             alt="Hero Profil"
                             fill
+                            sizes="100vw"
                             className="object-cover object-center"
                             priority
                         />
@@ -358,6 +359,7 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                                         src={profil?.strukturorganisasi_URL || "/struktur organisasi.png"}
                                         alt="Struktur Organisasi Yayasan Amanah"
                                         fill
+                                        sizes="(max-width: 768px) 100vw, 80vw"
                                         className="object-contain"
                                     />
                                 </div>

@@ -42,17 +42,17 @@ type ActiveTab = 'bank' | 'qris' | 'kitabisa'
 const DonasiAdminPage = () => {
     const queryClient = useQueryClient()
     const [activeTab, setActiveTab] = useState<ActiveTab>('bank')
-    
+
     // Modal states
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [modalType, setModalType] = useState<ActiveTab>('bank')
-    
+
     // Selected items for edit/delete
     const [selectedDonasi, setSelectedDonasi] = useState<Donasi | null>(null)
     const [selectedQris, setSelectedQris] = useState<Qris | null>(null)
     const [selectedKitaBisa, setSelectedKitaBisa] = useState<KitaBisa | null>(null)
-    
+
     // Form states
     const [donasiForm, setDonasiForm] = useState({
         namaBank: '',
@@ -62,14 +62,14 @@ const DonasiAdminPage = () => {
         logoUrl: '',
         isActive: true
     })
-    
+
     const [qrisForm, setQrisForm] = useState({
         nama: '',
         imageFile: null as File | null,
         imageUrl: '',
         isActive: true
     })
-    
+
     const [kitaBisaForm, setKitaBisaForm] = useState({
         namaProgram: '',
         deskripsi: '',
@@ -78,7 +78,7 @@ const DonasiAdminPage = () => {
         linkKitaBisa: '',
         isActive: true
     })
-    
+
     const [previewUrl, setPreviewUrl] = useState('')
     const [isUploading, setIsUploading] = useState(false)
 
@@ -261,7 +261,7 @@ const DonasiAdminPage = () => {
     const openEditModal = (type: ActiveTab, item: Donasi | Qris | KitaBisa) => {
         setModalType(type)
         setPreviewUrl('')
-        
+
         if (type === 'bank') {
             const donasi = item as Donasi
             setSelectedDonasi(donasi)
@@ -297,7 +297,7 @@ const DonasiAdminPage = () => {
             })
             setPreviewUrl(kitabisa.imageUrl)
         }
-        
+
         setIsModalOpen(true)
     }
 
@@ -490,31 +490,28 @@ const DonasiAdminPage = () => {
             <div className="flex border-b border-gray-200 mb-6">
                 <button
                     onClick={() => setActiveTab('bank')}
-                    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
-                        activeTab === 'bank'
+                    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === 'bank'
                             ? 'border-emerald-500 text-emerald-600'
                             : 'border-transparent text-gray-500 hover:text-gray-700'
-                    }`}
+                        }`}
                 >
                     Rekening Bank
                 </button>
                 <button
                     onClick={() => setActiveTab('qris')}
-                    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
-                        activeTab === 'qris'
+                    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === 'qris'
                             ? 'border-emerald-500 text-emerald-600'
                             : 'border-transparent text-gray-500 hover:text-gray-700'
-                    }`}
+                        }`}
                 >
                     QRIS
                 </button>
                 <button
                     onClick={() => setActiveTab('kitabisa')}
-                    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
-                        activeTab === 'kitabisa'
+                    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === 'kitabisa'
                             ? 'border-emerald-500 text-emerald-600'
                             : 'border-transparent text-gray-500 hover:text-gray-700'
-                    }`}
+                        }`}
                 >
                     KitaBisa
                 </button>
@@ -552,14 +549,14 @@ const DonasiAdminPage = () => {
                                                     src={donasi.logoUrl}
                                                     alt={donasi.namaBank}
                                                     fill
+                                                    sizes="200px"
                                                     className="object-contain"
                                                 />
                                             </div>
                                             <div>
                                                 <h3 className="font-semibold text-gray-900">{donasi.namaBank}</h3>
-                                                <span className={`inline-block px-2 py-0.5 text-xs rounded-full ${
-                                                    donasi.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
-                                                }`}>
+                                                <span className={`inline-block px-2 py-0.5 text-xs rounded-full ${donasi.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
+                                                    }`}>
                                                     {donasi.isActive ? 'Aktif' : 'Nonaktif'}
                                                 </span>
                                             </div>
@@ -612,14 +609,14 @@ const DonasiAdminPage = () => {
                                                 src={qris.imageUrl}
                                                 alt={qris.nama}
                                                 fill
+                                                sizes="200px"
                                                 className="object-contain"
                                             />
                                         </div>
                                         <div className="text-center">
                                             <h3 className="font-semibold text-gray-900">{qris.nama}</h3>
-                                            <span className={`inline-block mt-2 px-2 py-0.5 text-xs rounded-full ${
-                                                qris.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
-                                            }`}>
+                                            <span className={`inline-block mt-2 px-2 py-0.5 text-xs rounded-full ${qris.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
+                                                }`}>
                                                 {qris.isActive ? 'Aktif' : 'Nonaktif'}
                                             </span>
                                         </div>
@@ -658,15 +655,15 @@ const DonasiAdminPage = () => {
                                             src={item.imageUrl}
                                             alt={item.namaProgram}
                                             fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             className="object-cover"
                                         />
                                     </div>
                                     <div className="p-4">
                                         <div className="flex items-start justify-between gap-2 mb-2">
                                             <h3 className="font-semibold text-gray-900">{item.namaProgram}</h3>
-                                            <span className={`shrink-0 px-2 py-0.5 text-xs rounded-full ${
-                                                item.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
-                                            }`}>
+                                            <span className={`shrink-0 px-2 py-0.5 text-xs rounded-full ${item.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
+                                                }`}>
                                                 {item.isActive ? 'Aktif' : 'Nonaktif'}
                                             </span>
                                         </div>
@@ -712,15 +709,15 @@ const DonasiAdminPage = () => {
                     <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
                         <div className="p-6 border-b border-gray-100">
                             <h2 className="text-xl font-semibold text-gray-900">
-                                {modalType === 'bank' 
+                                {modalType === 'bank'
                                     ? (selectedDonasi ? 'Edit Rekening Bank' : 'Tambah Rekening Bank')
                                     : modalType === 'qris'
-                                    ? (selectedQris ? 'Edit QRIS' : 'Tambah QRIS')
-                                    : (selectedKitaBisa ? 'Edit Program KitaBisa' : 'Tambah Program KitaBisa')
+                                        ? (selectedQris ? 'Edit QRIS' : 'Tambah QRIS')
+                                        : (selectedKitaBisa ? 'Edit Program KitaBisa' : 'Tambah Program KitaBisa')
                                 }
                             </h2>
                         </div>
-                        
+
                         <form onSubmit={handleSubmit} className="p-6 space-y-4">
                             {/* Bank Form */}
                             {modalType === 'bank' && (
@@ -769,7 +766,7 @@ const DonasiAdminPage = () => {
                                         />
                                         {previewUrl && (
                                             <div className="mt-2 relative w-32 h-16 bg-gray-50 rounded overflow-hidden">
-                                                <Image src={previewUrl} alt="Preview" fill className="object-contain" />
+                                                <Image src={previewUrl} alt="Preview" fill sizes="200px" className="object-contain" />
                                             </div>
                                         )}
                                     </div>
@@ -926,8 +923,8 @@ const DonasiAdminPage = () => {
                             <p className="text-gray-600 text-center">
                                 Apakah Anda yakin ingin menghapus {
                                     modalType === 'bank' ? `rekening ${selectedDonasi?.namaBank}` :
-                                    modalType === 'qris' ? `QRIS ${selectedQris?.nama}` :
-                                    `program ${selectedKitaBisa?.namaProgram}`
+                                        modalType === 'qris' ? `QRIS ${selectedQris?.nama}` :
+                                            `program ${selectedKitaBisa?.namaProgram}`
                                 }? Tindakan ini tidak dapat dibatalkan.
                             </p>
                         </div>

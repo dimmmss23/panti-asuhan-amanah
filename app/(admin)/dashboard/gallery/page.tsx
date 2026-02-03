@@ -240,6 +240,7 @@ const GalleryPage = () => {
                                         src={gallery.imageUrl}
                                         alt={gallery.title}
                                         fill
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                                         className="object-cover sm:group-hover:scale-105 transition-transform duration-300"
                                     />
                                     {/* Overlay - selalu terlihat di mobile, hover di desktop */}
@@ -324,6 +325,7 @@ const GalleryPage = () => {
                                                     src={previewUrl}
                                                     alt="Preview"
                                                     fill
+                                                    sizes="(max-width: 768px) 100vw, 500px"
                                                     className="object-contain rounded-lg"
                                                 />
                                             </div>
