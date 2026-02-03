@@ -1,8 +1,20 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import Link from "next/link"
+import prisma from "../libs/prisma"
 
-export default function SyaratKetentuanPage() {
+export default async function SyaratKetentuanPage() {
+    // Fetch data rekening bank yang aktif dari database
+    const rekeningBank = await prisma.donasi.findMany({
+        where: { isActive: true },
+        orderBy: { createdAt: 'asc' },
+        select: {
+            namaBank: true,
+            nomorRekening: true,
+            atasNama: true
+        }
+    })
+
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <Navbar />
@@ -110,7 +122,19 @@ export default function SyaratKetentuanPage() {
                                     <p>Donasi yang diberikan kepada Yayasan Panti Asuhan Amanah bersifat sukarela dan tidak dapat diminta kembali (non-refundable).</p>
                                     <p>Seluruh donasi akan digunakan untuk keperluan operasional yayasan, pendidikan anak asuh, kebutuhan sehari-hari, dan program pemberdayaan sesuai dengan visi dan misi yayasan.</p>
                                     <p>Donatur berhak mendapatkan informasi mengenai penggunaan donasi melalui laporan berkala yang dipublikasikan oleh yayasan.</p>
-                                    <p>Rekening resmi donasi adalah <strong>BRI 574601037734534 a.n. Panti Asuhan Amanah</strong>. Yayasan tidak bertanggung jawab atas donasi yang ditransfer ke rekening selain yang tercantum.</p>
+                                    <p>Rekening resmi donasi adalah:</p>
+                                    {rekeningBank.length > 0 ? (
+                                        <ul className="list-disc pl-5 space-y-2">
+                                            {rekeningBank.map((rek, index) => (
+                                                <li key={index}>
+                                                    <strong>{rek.namaBank} {rek.nomorRekening}</strong> a.n. <strong>{rek.atasNama}</strong>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p><strong>Silakan hubungi kami untuk informasi rekening donasi.</strong></p>
+                                    )}
+                                    <p className="mt-3 text-red-600 font-medium">Yayasan tidak bertanggung jawab atas donasi yang ditransfer ke rekening selain yang tercantum di atas.</p>
                                 </div>
                             </div>
 

@@ -50,15 +50,15 @@ const Hero = () => {
                             className="w-full flex-shrink-0 relative"
                             style={{ minWidth: '100%' }}
                         >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <div className="w-full relative h-[400px] sm:h-[500px] md:h-[600px]">
+                            {/* Container gambar - height auto mengikuti gambar asli */}
+                            <div className="w-full relative">
                                 <Image
                                     src={slide.src}
                                     alt={slide.alt}
-                                    fill
+                                    width={1920}
+                                    height={1080}
                                     sizes="100vw"
-                                    className="object-cover"
+                                    className="w-full h-auto"
                                     priority={index === 0}
                                 />
                             </div>
