@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/libs/prisma";
+import { authGuard } from "@/app/libs/auth-guard";
 
 export async function GET() {
+  const unauthorized = await authGuard();
+  if (unauthorized) return unauthorized;
+
   const profil = await prisma.profil.findFirst({
     include: { Legalitas: true }
   });
@@ -9,6 +13,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const unauthorized = await authGuard();
+  if (unauthorized) return unauthorized;
+
   const body = await req.json();
   let profil = await prisma.profil.findFirst({});
   if (profil) {
@@ -31,6 +38,9 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
+  const unauthorized = await authGuard();
+  if (unauthorized) return unauthorized;
+
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
   if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 });

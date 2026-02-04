@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server"
 import prisma from "@/app/libs/prisma"
 import bcrypt from "bcryptjs"
+import { authGuard } from "@/app/libs/auth-guard"
 
 // GET - Ambil semua users
 export async function GET() {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const users = await prisma.user.findMany({
             select: {
@@ -31,6 +35,9 @@ export async function GET() {
 
 // POST - Tambah user baru
 export async function POST(request: Request) {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const body = await request.json()
         const { name, email, password } = body

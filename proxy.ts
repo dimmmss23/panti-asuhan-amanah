@@ -12,8 +12,18 @@ export default auth((req) => {
         }
     }
 
-    // Redirect ke dashboard jika sudah login dan akses halaman login
-    if (pathname === "/login") {
+    // Proteksi API admin routes
+    if (pathname.startsWith("/api/admin")) {
+        if (!isLoggedIn) {
+            return NextResponse.json(
+                { error: "Unauthorized - Silakan login terlebih dahulu" },
+                { status: 401 }
+            )
+        }
+    }
+
+    // Redirect ke dashboard jika sudah login dan akses halaman login/register
+    if (pathname === "/login" || pathname === "/register") {
         if (isLoggedIn) {
             return NextResponse.redirect(new URL("/dashboard", req.url))
         }
@@ -23,5 +33,5 @@ export default auth((req) => {
 })
 
 export const config = {
-    matcher: ["/dashboard/:path*", "/login"]
+    matcher: ["/dashboard/:path*", "/api/admin/:path*", "/login", "/register"]
 }

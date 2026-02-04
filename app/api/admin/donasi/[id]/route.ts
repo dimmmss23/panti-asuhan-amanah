@@ -1,11 +1,15 @@
 import prisma from "@/app/libs/prisma"
 import { NextRequest, NextResponse } from "next/server"
+import { authGuard } from "@/app/libs/auth-guard"
 
 // GET single donasi
 export async function GET(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const { id } = await params
         const donasi = await prisma.donasi.findUnique({
@@ -34,6 +38,9 @@ export async function PUT(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const { id } = await params
         const body = await request.json()
@@ -65,6 +72,9 @@ export async function DELETE(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const { id } = await params
         await prisma.donasi.delete({

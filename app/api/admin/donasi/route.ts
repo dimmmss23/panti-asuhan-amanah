@@ -1,8 +1,12 @@
 import prisma from "@/app/libs/prisma"
 import { NextRequest, NextResponse } from "next/server"
+import { authGuard } from "@/app/libs/auth-guard"
 
 // GET all donasi (bank accounts)
 export async function GET() {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const donasi = await prisma.donasi.findMany({
             orderBy: { createdAt: 'desc' }
@@ -19,6 +23,9 @@ export async function GET() {
 
 // POST new donasi (bank account)
 export async function POST(request: NextRequest) {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const body = await request.json()
         const { namaBank, nomorRekening, atasNama, logoUrl, isActive } = body

@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server"
 import prisma from "@/app/libs/prisma"
 import bcrypt from "bcryptjs"
+import { authGuard } from "@/app/libs/auth-guard"
 
 // PUT - Update user
 export async function PUT(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const { id } = await params
         const body = await request.json()
@@ -90,6 +94,9 @@ export async function DELETE(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const { id } = await params
 

@@ -1,8 +1,12 @@
 import prisma from "@/app/libs/prisma"
 import { NextRequest, NextResponse } from "next/server"
+import { authGuard } from "@/app/libs/auth-guard"
 
 // GET all QRIS
 export async function GET() {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const qris = await prisma.qris.findMany({
             orderBy: { createdAt: 'desc' }
@@ -19,6 +23,9 @@ export async function GET() {
 
 // POST new QRIS
 export async function POST(request: NextRequest) {
+    const unauthorized = await authGuard()
+    if (unauthorized) return unauthorized
+
     try {
         const body = await request.json()
         const { nama, imageUrl, isActive } = body
