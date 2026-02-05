@@ -7,10 +7,10 @@ const DashboardPage = async () => {
     const session = await auth()
 
     // Fetch data untuk statistik
-    const [profil, totalGallery, totalDonasi, totalUsers] = await Promise.all([
+    const [profil, totalGallery, totalKitaBisa, totalUsers] = await Promise.all([
         prisma.profil.findFirst(),
         prisma.gallery.count(),
-        prisma.donasi.count(),
+        prisma.kitaBisa.count(),
         prisma.user.count()
     ])
 
@@ -78,8 +78,8 @@ const DashboardPage = async () => {
                         <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition duration-300 cursor-pointer border-l-4 border-green-500">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-500 mb-1">Metode Donasi</p>
-                                    <p className="text-3xl font-bold text-gray-900">{totalDonasi}</p>
+                                    <p className="text-sm font-medium text-gray-500 mb-1">Program KitaBisa</p>
+                                    <p className="text-3xl font-bold text-gray-900">{totalKitaBisa}</p>
                                     <p className="text-xs text-green-600 mt-2">Kelola donasi →</p>
                                 </div>
                                 <div className="p-3 rounded-full bg-green-100 text-green-600">

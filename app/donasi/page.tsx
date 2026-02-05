@@ -18,14 +18,12 @@ interface Donasi {
     nomorRekening: string;
     atasNama: string;
     logoUrl: string;
-    isActive: boolean;
 }
 
 interface Qris {
     id: number;
     nama: string;
     imageUrl: string;
-    isActive: boolean;
 }
 
 interface KitaBisa {
@@ -37,33 +35,46 @@ interface KitaBisa {
     isActive: boolean;
 }
 
-interface DonationData {
-    donasi: Donasi[];
-    qris: Qris[];
-    kitabisa: KitaBisa[];
-}
+// Data Rekening & QRIS Statis (Tidak bisa diubah via dashboard untuk keamanan)
+const STATIC_DONASI: Donasi[] = [
+    {
+        id: 1,
+        namaBank: "BRI",
+        nomorRekening: "574601037734534",
+        atasNama: "PANTI ASUHAN AMANAH",
+        logoUrl: "/Logo BRI.png"
+    }
+];
+
+const STATIC_QRIS: Qris[] = [
+    {
+        id: 1,
+        nama: "QRIS Panti Asuhan Amanah",
+        imageUrl: "/Qris.png"
+    }
+];
 
 const DonationPage = () => {
     const [copiedId, setCopiedId] = useState<number | null>(null);
-    const [data, setData] = useState<DonationData | null>(null);
+    const [kitabisa, setKitabisa] = useState<KitaBisa[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchKitabisa = async () => {
             try {
                 const res = await fetch('/api/donasi');
                 if (res.ok) {
                     const result = await res.json();
-                    setData(result);
+                    setKitabisa(result.kitabisa || []);
                 }
             } catch (error) {
-                console.error('Error fetching donation data:', error);
+                console.error('Error fetching kitabisa data:', error);
             } finally {
                 setIsLoading(false);
             }
         };
 
-        fetchData();
+        fetchKitabisa();
     }, []);
 
     const handleCopy = (accountNumber: string, id: number) => {
@@ -191,7 +202,7 @@ const DonationPage = () => {
                         </section>
 
                         {/* KitaBisa Cards Section */}
-                        {data?.kitabisa && data.kitabisa.length > 0 && (
+                        {kitabisa.length > 0 && (
                             <section>
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
@@ -204,7 +215,7 @@ const DonationPage = () => {
                                 </motion.div>
 
                                 <div className="flex flex-wrap justify-center gap-6">
-                                    {data.kitabisa.map((item, index) => (
+                                    {kitabisa.map((item, index) => (
                                         <motion.div
                                             key={item.id}
                                             initial={{ opacity: 0, y: 20 }}
@@ -243,9 +254,8 @@ const DonationPage = () => {
                         )}
 
                         {/* Bank Account Cards */}
-                        {data?.donasi && data.donasi.length > 0 && (
-                            <section>
-                                <motion.div
+                        <section>
+                            <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4 }}
@@ -256,7 +266,7 @@ const DonationPage = () => {
                                 </motion.div>
 
                                 <div className="flex flex-wrap justify-center gap-6">
-                                    {data.donasi.map((bank, index) => (
+                                    {STATIC_DONASI.map((bank, index) => (
                                         <motion.div
                                             key={bank.id}
                                             initial={{ opacity: 0, scale: 0.98 }}
@@ -316,11 +326,9 @@ const DonationPage = () => {
                                     ))}
                                 </div>
                             </section>
-                        )}
 
                         {/* QRIS Section */}
-                        {data?.qris && data.qris.length > 0 && (
-                            <section>
+                        <section>
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -332,7 +340,7 @@ const DonationPage = () => {
                                 </motion.div>
 
                                 <div className="flex flex-wrap justify-center gap-6">
-                                    {data.qris.map((qris, index) => (
+                                    {STATIC_QRIS.map((qris, index) => (
                                         <motion.div
                                             key={qris.id}
                                             initial={{ opacity: 0, scale: 0.98 }}
@@ -357,7 +365,6 @@ const DonationPage = () => {
                                     ))}
                                 </div>
                             </section>
-                        )}
 
                         {/* Instructions & Notes */}
                         <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
