@@ -5,9 +5,12 @@ import GlobeKontak from "../components/GlobeKontak"
 import Footer from "../components/Footer"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { useState } from "react"
 
 
 export default function ContactPage() {
+    const [loadMapA, setLoadMapA] = useState(false);
+    const [loadMapB, setLoadMapB] = useState(false);
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
             <Navbar />
@@ -37,50 +40,30 @@ export default function ContactPage() {
                     <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
                         <div className="text-center max-w-3xl mx-auto">
                             {/* Decorative Icon */}
-                            <motion.div
-                                className="flex justify-center mb-6"
-                                initial={{ scale: 0, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.5, type: "spring" }}
-                            >
+                            <div className="flex justify-center mb-6">
                                 <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
                                     <svg className="w-8 h-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                     </svg>
                                 </div>
-                            </motion.div>
+                            </div>
 
                             {/* Title */}
-                            <motion.h1
-                                className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4"
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.2, duration: 0.5 }}
-                            >
+                            <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4">
                                 Hubungi Kami
-                            </motion.h1>
+                            </h1>
 
                             {/* Decorative Divider */}
-                            <motion.div
-                                className="flex items-center justify-center gap-3 mb-6"
-                                initial={{ scaleX: 0 }}
-                                animate={{ scaleX: 1 }}
-                                transition={{ delay: 0.4, duration: 0.5 }}
-                            >
+                            <div className="flex items-center justify-center gap-3 mb-6">
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-400/70" />
                                 <div className="w-2 h-2 bg-amber-400 rounded-full" />
                                 <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-400/70" />
-                            </motion.div>
+                            </div>
 
                             {/* Description */}
-                            <motion.p
-                                className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed"
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.6, duration: 0.5 }}
-                            >
+                            <p className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed">
                                 Kami siap mendengar dari Anda. Jangan ragu untuk menghubungi kami untuk pertanyaan, donasi, atau dukungan.
-                            </motion.p>
+                            </p>
                         </div>
                     </div>
 
@@ -178,15 +161,30 @@ export default function ContactPage() {
                                 </div>
                             </div>
                             <div className="h-56 bg-gray-100 relative">
-                                <iframe
-                                    title="Map A"
-                                    width="100%"
-                                    height="100%"
-                                    frameBorder="0"
-                                    style={{ border: 0 }}
-                                    src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.5!2d104.7826551!3d-2.9702901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b7716622a1e0f%3A0x7e549b1ff3e7943a!2sYayasan%20panti%20asuhan%20amanah%20dan%20rumah%20Tahfidz%20Qur'an!5e0!3m2!1sid!2sid!4v1706900000000!5m2!1sid!2sid`}
-                                    allowFullScreen
-                                ></iframe>
+                                {loadMapA ? (
+                                    <iframe
+                                        title="Map A"
+                                        width="100%"
+                                        height="100%"
+                                        frameBorder="0"
+                                        style={{ border: 0 }}
+                                        src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.5!2d104.7826551!3d-2.9702901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b7716622a1e0f%3A0x7e549b1ff3e7943a!2sYayasan%20panti%20asuhan%20amanah%20dan%20rumah%20Tahfidz%20Qur'an!5e0!3m2!1sid!2sid!4v1706900000000!5m2!1sid!2sid`}
+                                        allowFullScreen
+                                    ></iframe>
+                                ) : (
+                                    <button
+                                        onClick={() => setLoadMapA(true)}
+                                        className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+                                    >
+                                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                            <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                        </div>
+                                        <span className="text-sm font-medium text-gray-600">Klik untuk muat peta</span>
+                                    </button>
+                                )}
                             </div>
                             <div className="p-4 border-t border-gray-100">
                                 <Link
@@ -215,16 +213,31 @@ export default function ContactPage() {
                                     <span className="text-xs text-green-700 font-medium">08.00 - 17.00 WIB</span>
                                 </div>
                             </div>
-                            <div className="h-56 bg-gray-100">
-                                <iframe
-                                    title="Map B"
-                                    width="100%"
-                                    height="100%"
-                                    frameBorder="0"
-                                    style={{ border: 0 }}
-                                    src={`https://maps.google.com/maps?q=Jl.+Lb.+Rejo,+Sekip+Jaya,+Palembang&z=15&output=embed`}
-                                    allowFullScreen
-                                ></iframe>
+                            <div className="h-56 bg-gray-100 relative">
+                                {loadMapB ? (
+                                    <iframe
+                                        title="Map B"
+                                        width="100%"
+                                        height="100%"
+                                        frameBorder="0"
+                                        style={{ border: 0 }}
+                                        src={`https://maps.google.com/maps?q=Jl.+Lb.+Rejo,+Sekip+Jaya,+Palembang&z=15&output=embed`}
+                                        allowFullScreen
+                                    ></iframe>
+                                ) : (
+                                    <button
+                                        onClick={() => setLoadMapB(true)}
+                                        className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+                                    >
+                                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                            <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                        </div>
+                                        <span className="text-sm font-medium text-gray-600">Klik untuk muat peta</span>
+                                    </button>
+                                )}
                             </div>
                             <div className="p-4 border-t border-gray-100">
                                 <Link

@@ -252,7 +252,10 @@ export function WebGLRendererConfig() {
     const { gl, size } = useThree();
 
     useEffect(() => {
-        gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        // Mobile devices get lower pixel ratio for better performance
+        const isMobile = /Mobi|Android/i.test(window.navigator.userAgent);
+        const maxPixelRatio = isMobile ? 1 : 2;
+        gl.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
         gl.setSize(size.width, size.height);
         gl.setClearColor(0xffaaff, 0);
     }, [gl, size]);

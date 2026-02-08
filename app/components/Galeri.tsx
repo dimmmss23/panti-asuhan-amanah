@@ -63,24 +63,16 @@ const Galeri = () => {
         <section className="py-16 sm:py-20 bg-gray-50 overflow-hidden">
             <div className="container mx-auto px-4 max-w-6xl">
                 {/* Main Card */}
-                <motion.div
+                <div
                     className="relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
                 >
                     {/* Subtle Top Accent Line */}
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600" />
 
                     <div className="relative z-10 p-6 sm:p-10 md:p-12">
                         {/* Section Header */}
-                        <motion.div
+                        <div
                             className="text-center mb-10"
-                            initial={{ opacity: 0, y: -20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
                         >
                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-md border border-green-100 mb-4">
                                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,7 +87,7 @@ const Galeri = () => {
                             <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
                                 Dokumentasi kegiatan dan momen berharga di Panti Asuhan Amanah
                             </p>
-                        </motion.div>
+                        </div>
 
                         {/* Gallery Grid - 2 columns on mobile */}
                         {isLoading ? (
@@ -227,7 +219,7 @@ const Galeri = () => {
                             </div>
                         )}
                     </div>
-                </motion.div>
+                </div>
             </div>
         </section>
     )
