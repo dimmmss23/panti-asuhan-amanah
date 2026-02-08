@@ -89,7 +89,7 @@ export default function GlobePanti() {
                         >
                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-md border border-green-100 mb-4">
                                 <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
+                                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                                 </svg>
                                 Palembang, Sumatera Selatan
                             </span>
@@ -103,13 +103,13 @@ export default function GlobePanti() {
                         </motion.div>
 
                         {/* Globe Visualization */}
-                        <div className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] z-10 pointer-events-none md:pointer-events-auto transition-opacity duration-500 mt-4">
+                        <div className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] z-10 pointer-events-auto transition-opacity duration-500 mt-4">
                             <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/80 to-transparent z-40 pointer-events-none" />
                             <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />
                         </div>
 
                         {/* Location Info Cards */}
-                        <motion.div 
+                        <motion.div
                             className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 mb-8"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -125,7 +125,7 @@ export default function GlobePanti() {
                                 </div>
                                 <div>
                                     <h4 className="text-gray-900 font-semibold text-sm mb-0.5">Lokasi Panti Asuhan Amanah (A)</h4>
-                                    <p className="text-gray-500 text-xs leading-relaxed">2QHM+V3C Pasar Lemabang, Jl. Bambang Utoyo Jl. Pusaka No.76, 3 Ilir, Kec. Ilir Tim. II, Kota Palembang, Sumatera Selatan</p>
+                                    <p className="text-gray-500 text-xs leading-relaxed">Jl. Bambang Utoyo Jl. Pusaka No.76, Pasar Lemabang, 3 Ilir, Kec. Ilir Tim. II, Kota Palembang, Sumatera Selatan</p>
                                 </div>
                             </div>
                             <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-start gap-3 hover:border-green-200 hover:bg-green-50/30 transition-all duration-300">

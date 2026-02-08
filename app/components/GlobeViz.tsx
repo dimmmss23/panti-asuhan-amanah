@@ -10,7 +10,7 @@ import countries from "@/data/globe.json";
 declare module "@react-three/fiber" {
     interface ThreeElements {
         threeGlobe: ThreeElements["mesh"] & {
-            new (): ThreeGlobe;
+            new(): ThreeGlobe;
         };
     }
 }
@@ -67,14 +67,14 @@ function latLngToRotation(lat: number, lng: number) {
     // Convert degrees to radians
     const latRad = lat * (Math.PI / 180);
     const lngRad = lng * (Math.PI / 180);
-    
+
     // Calculate globe rotation to center on the point
     // Rotate Y axis based on longitude (with offset to face camera)
     const rotationY = -lngRad - Math.PI / 2;
     // Tilt based on latitude - negative offset to tilt globe backward
     // This brings equatorial/southern locations (like Indonesia) more to the center view
     const rotationX = -0.6; // Tilt globe backward to show Indonesia in center
-    
+
     return { rotationX, rotationY };
 }
 
@@ -105,7 +105,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
         if (!globeRef.current && groupRef.current) {
             globeRef.current = new ThreeGlobe();
             (groupRef.current as any).add(globeRef.current);
-            
+
             // Set initial rotation to center on Palembang
             if (globeConfig.initialPosition) {
                 const { rotationX, rotationY } = latLngToRotation(
@@ -115,7 +115,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
                 groupRef.current.rotation.y = rotationY;
                 groupRef.current.rotation.x = rotationX;
             }
-            
+
             setIsInitialized(true);
         }
     }, [globeConfig.initialPosition]);
@@ -264,7 +264,7 @@ export default function GlobeViz(props: WorldProps) {
     const { globeConfig } = props;
     const scene = new Scene();
     scene.fog = new Fog(0xffffff, 400, 2000);
-    
+
     // Detect mobile
     const isMobile = typeof window !== "undefined" && /Mobi|Android/i.test(window.navigator.userAgent);
 
@@ -292,7 +292,7 @@ export default function GlobeViz(props: WorldProps) {
             <OrbitControls
                 enablePan={false}
                 enableZoom={false}
-                enableRotate={!isMobile}
+                enableRotate={true}
                 minDistance={cameraZ}
                 maxDistance={cameraZ}
                 autoRotateSpeed={0}
