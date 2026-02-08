@@ -91,8 +91,8 @@ const LiterasiPondok = () => {
                     className="relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.4 }}
                 >
                     {/* Subtle Top Accent Line */}
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600" />
@@ -104,7 +104,7 @@ const LiterasiPondok = () => {
                             initial={{ opacity: 0, y: -20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
+                            transition={{ duration: 0.4 }}
                         >
                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-md border border-green-100 mb-4">
                                 <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
@@ -127,7 +127,7 @@ const LiterasiPondok = () => {
                             initial={{ opacity: 0, scale: 0.98 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
+                            transition={{ duration: 0.4, delay: 0.1 }}
                         >
                             <div
                                 className="relative w-full max-w-4xl mx-auto cursor-pointer group"
@@ -168,10 +168,10 @@ const LiterasiPondok = () => {
                         {/* Slider Videos - Smaller Size */}
                         <motion.div
                             className="relative mt-6"
-                            initial={{ opacity: 0, x: 50 }}
+                            initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
                         >
                             {/* Videos Slider */}
                             <div
