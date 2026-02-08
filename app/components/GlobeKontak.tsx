@@ -5,8 +5,14 @@ import dynamic from "next/dynamic";
 import type { GlobeConfig } from "./GlobeViz";
 
 // Dynamic import untuk GlobeViz (client-side only)
+// Dynamic import untuk GlobeViz (client-side only)
 const GlobeViz = dynamic(() => import("./GlobeViz"), {
     ssr: false,
+    loading: () => (
+        <div className="flex items-center justify-center w-full h-full bg-gray-50/50 rounded-full animate-pulse">
+            <div className="w-2/3 h-2/3 bg-gray-100/50 rounded-full" />
+        </div>
+    ),
 });
 
 // Tipe data untuk arc/posisi pada globe
