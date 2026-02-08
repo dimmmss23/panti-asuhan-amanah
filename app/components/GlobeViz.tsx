@@ -54,6 +54,7 @@ export type GlobeConfig = {
     };
     autoRotate?: boolean;
     autoRotateSpeed?: number;
+    hexPolygonResolution?: number;
 };
 
 interface WorldProps {
@@ -168,7 +169,7 @@ export function Globe({ globeConfig, data, onGlobeReady }: WorldProps) {
 
         globeRef.current
             .hexPolygonsData(countries.features)
-            .hexPolygonResolution(3)
+            .hexPolygonResolution(defaultProps.hexPolygonResolution || 3)
             .hexPolygonMargin(0.6) // Balanced margin for clear dots
             .showAtmosphere(defaultProps.showAtmosphere)
             .atmosphereColor(defaultProps.atmosphereColor)
@@ -257,21 +258,27 @@ export function Globe({ globeConfig, data, onGlobeReady }: WorldProps) {
     return <group ref={groupRef} />;
 }
 
-export function WebGLRendererConfig() {
+export function WebGLRendererConfig({ dpr = [1, 2] }: { dpr?: [number, number] }) {
     const { gl, size } = useThree();
 
     useEffect(() => {
-        // Revert to high quality for better visuals
-        gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        // Use provided dpr limit
+        const maxDpr = dpr[1];
+        gl.setPixelRatio(Math.min(window.devicePixelRatio, maxDpr));
         gl.setSize(size.width, size.height);
         gl.setClearColor(0xffaaff, 0);
-    }, [gl, size]);
+    }, [gl, size, dpr]);
 
     return null;
 }
 
-export default function GlobeViz(props: WorldProps) {
-    const { globeConfig } = props;
+export interface GlobePerformanceOptions {
+    dpr?: [number, number];
+    antialias?: boolean;
+}
+
+export default function GlobeViz(props: WorldProps & GlobePerformanceOptions) {
+    const { globeConfig, dpr = [1, 2], antialias = true } = props;
     const scene = new Scene();
     scene.fog = new Fog(0xffffff, 400, 2000);
 
@@ -297,13 +304,13 @@ export default function GlobeViz(props: WorldProps) {
             camera={{ position: [0, 0, responsiveCameraZ], fov: 50 }}
             gl={{
                 powerPreference: "high-performance",
-                antialias: true,
+                antialias: antialias,
                 alpha: true,
                 preserveDrawingBuffer: true
             }}
-            dpr={[1, 2]}
+            dpr={dpr}
         >
-            <WebGLRendererConfig />
+            <WebGLRendererConfig dpr={dpr} />
             <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
             <directionalLight
                 color={globeConfig.directionalLeftLight}

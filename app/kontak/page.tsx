@@ -1,7 +1,7 @@
 "use client"
 
 import Navbar from "../components/Navbar"
-import GlobeKontak from "../components/GlobeKontak"
+
 import Footer from "../components/Footer"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -146,8 +146,7 @@ export default function ContactPage() {
                         </div>
                     </div>
 
-                    {/* Globe Section */}
-                    <GlobeKontak />
+                    {/* Globe Section removed as per user request */}
 
                     {/* Maps Section Title */}
                     <div className="text-center pt-8 pb-4">
