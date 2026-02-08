@@ -1,6 +1,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SmoothScrolling } from "./components/SmoothScrolling"
 import "./globals.css";
 
 import NextTopLoader from "nextjs-toploader";
@@ -21,18 +22,20 @@ export default function RootLayout({
         <meta name="google-site-verification" content="TdIB4lhbLG9a8tJXGuRtGK4ob8jU9of2YWF-fBhj33w" />
       </head>
       <body className="overflow-x-hidden">
-        <NextTopLoader
-          color="#10B981"
-          initialPosition={0.08}
-          crawlSpeed={200}
-          height={3}
-          crawl={true}
-          showSpinner={false}
-          easing="ease"
-          speed={200}
-          shadow="0 0 10px #10B981,0 0 5px #10B981"
-        />
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <SmoothScrolling>
+          <NextTopLoader
+            color="#10B981"
+            initialPosition={0.08}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={false}
+            easing="ease"
+            speed={200}
+            shadow="0 0 10px #10B981,0 0 5px #10B981"
+          />
+          <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        </SmoothScrolling>
       </body>
     </html>
   );
