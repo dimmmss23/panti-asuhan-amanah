@@ -18,7 +18,6 @@ declare module "@react-three/fiber" {
 extend({ ThreeGlobe: ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
-const aspect = 1.2;
 const cameraZ = 300;
 
 type Position = {
@@ -60,6 +59,7 @@ export type GlobeConfig = {
 interface WorldProps {
     globeConfig: GlobeConfig;
     data: Position[];
+    onGlobeReady?: () => void;
 }
 
 // Helper function to convert lat/lng to rotation
@@ -71,14 +71,16 @@ function latLngToRotation(lat: number, lng: number) {
     // Calculate globe rotation to center on the point
     // Rotate Y axis based on longitude (with offset to face camera)
     const rotationY = -lngRad - Math.PI / 2;
-    // Tilt based on latitude - negative offset to tilt globe backward
-    // This brings equatorial/southern locations (like Indonesia) more to the center view
-    const rotationX = -0.6; // Tilt globe backward to show Indonesia in center
+
+    // Rotate X axis based on latitude to center it vertically
+    // Positive latitude (North) needs positive rotation to bring it down to center?
+    // Actually, simply using latRad aligns the latitude to the camera plane.
+    const rotationX = latRad;
 
     return { rotationX, rotationY };
 }
 
-export function Globe({ globeConfig, data }: WorldProps) {
+export function Globe({ globeConfig, data, onGlobeReady }: WorldProps) {
     const globeRef = useRef<ThreeGlobe | null>(null);
     const groupRef = useRef<any>(null);
     const [isInitialized, setIsInitialized] = useState(false);
@@ -88,7 +90,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
         atmosphereColor: "#ffffff",
         showAtmosphere: true,
         atmosphereAltitude: 0.1,
-        polygonColor: "rgba(255,255,255,0.7)",
+        polygonColor: "rgba(255,255,255,0.8)", // Slightly less opaque to reduce harsh flickering
         globeColor: "#1d072e",
         emissive: "#000000",
         emissiveIntensity: 0.1,
@@ -117,8 +119,9 @@ export function Globe({ globeConfig, data }: WorldProps) {
             }
 
             setIsInitialized(true);
+            if (onGlobeReady) onGlobeReady();
         }
-    }, [globeConfig.initialPosition]);
+    }, [globeConfig.initialPosition, onGlobeReady]);
 
     useEffect(() => {
         if (!globeRef.current || !isInitialized) return;
@@ -166,11 +169,17 @@ export function Globe({ globeConfig, data }: WorldProps) {
         globeRef.current
             .hexPolygonsData(countries.features)
             .hexPolygonResolution(3)
-            .hexPolygonMargin(0.7)
+            .hexPolygonMargin(0.6) // Balanced margin for clear dots
             .showAtmosphere(defaultProps.showAtmosphere)
             .atmosphereColor(defaultProps.atmosphereColor)
             .atmosphereAltitude(defaultProps.atmosphereAltitude)
-            .hexPolygonColor(() => defaultProps.polygonColor);
+            .hexPolygonColor((e) => {
+                // Ensure contrast against white globe
+                if (["IDN"].includes((e as any).properties.ISO_A3)) {
+                    return "#16a34a"; // Highlight Indonesia with Green (green-600)
+                }
+                return defaultProps.polygonColor; // Use default for others
+            });
 
         globeRef.current
             .arcsData(floatingArcs)
@@ -252,10 +261,8 @@ export function WebGLRendererConfig() {
     const { gl, size } = useThree();
 
     useEffect(() => {
-        // Mobile devices get lower pixel ratio for better performance
-        const isMobile = /Mobi|Android/i.test(window.navigator.userAgent);
-        const maxPixelRatio = isMobile ? 1 : 2;
-        gl.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
+        // Revert to high quality for better visuals
+        gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         gl.setSize(size.width, size.height);
         gl.setClearColor(0xffaaff, 0);
     }, [gl, size]);
@@ -268,14 +275,33 @@ export default function GlobeViz(props: WorldProps) {
     const scene = new Scene();
     scene.fog = new Fog(0xffffff, 400, 2000);
 
-    // Detect mobile
-    const isMobile = typeof window !== "undefined" && /Mobi|Android/i.test(window.navigator.userAgent);
+    // Responsive logic
+    // Initialize with window.innerWidth if available to prevent hydration mismatch for initial render
+    const [width, setWidth] = useState(() => typeof window !== "undefined" ? window.innerWidth : 1024);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const handleResize = () => setWidth(window.innerWidth);
+            window.addEventListener("resize", handleResize);
+            return () => window.removeEventListener("resize", handleResize);
+        }
+    }, []);
+
+    // Adjust camera Z based on screen width
+    // Mobile needs closer distance to make globe look larger
+    const isMobile = width < 640;
+    const responsiveCameraZ = isMobile ? 325 : 300;
 
     return (
         <Canvas
-            scene={scene}
-            camera={new PerspectiveCamera(50, aspect, 180, 1800)}
-            gl={{ powerPreference: "high-performance", antialias: false, alpha: true }}
+            camera={{ position: [0, 0, responsiveCameraZ], fov: 50 }}
+            gl={{
+                powerPreference: "high-performance",
+                antialias: true,
+                alpha: true,
+                preserveDrawingBuffer: true
+            }}
+            dpr={[1, 2]}
         >
             <WebGLRendererConfig />
             <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
@@ -297,8 +323,8 @@ export default function GlobeViz(props: WorldProps) {
                 enablePan={false}
                 enableZoom={false}
                 enableRotate={true}
-                minDistance={cameraZ}
-                maxDistance={cameraZ}
+                minDistance={responsiveCameraZ}
+                maxDistance={responsiveCameraZ}
                 autoRotateSpeed={0}
                 autoRotate={false}
                 minPolarAngle={Math.PI / 3.5}

@@ -4,16 +4,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import type { GlobeConfig } from "./GlobeViz";
-
+import { useInView } from "react-intersection-observer";
+import GlobeSkeleton from "./GlobeSkeleton";
 
 // Dynamic import untuk GlobeViz (client-side only)
 const GlobeViz = dynamic(() => import("./GlobeViz"), {
     ssr: false,
-    loading: () => (
-        <div className="flex items-center justify-center w-full h-full bg-gray-50/50 rounded-full animate-pulse">
-            <div className="w-2/3 h-2/3 bg-gray-100/50 rounded-full" />
-        </div>
-    ),
+    loading: () => <GlobeSkeleton />,
 });
 
 // Tipe data untuk arc/posisi pada globe
@@ -61,13 +58,21 @@ const ARCS_DATA: Position[] = [];
 
 export default function GlobePanti() {
     const [mounted, setMounted] = useState(false);
+    const [globeReady, setGlobeReady] = useState(false);
+
+    // Lazy load globe only when visible
+    const { ref, inView } = useInView({
+        triggerOnce: true, // Only trigger once
+        threshold: 0.1,    // Trigger when 10% visible
+        rootMargin: "200px 0px" // Start loading 200px before it comes into view
+    });
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
     return (
-        <section className="relative py-16 sm:py-20 bg-white w-full overflow-hidden">
+        <section ref={ref} className="relative py-16 sm:py-20 bg-white w-full overflow-hidden">
             <div className="container mx-auto px-4 max-w-6xl">
                 {/* Main Card */}
                 <div
@@ -95,9 +100,25 @@ export default function GlobePanti() {
                         </div>
 
                         {/* Globe Visualization */}
+                        {/* Globe Visualization */}
                         <div className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] z-10 pointer-events-auto mt-4">
                             <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/80 to-transparent z-40 pointer-events-none" />
-                            <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />
+
+                            {/* Always show Skeleton if globe is not ready OR not in view */}
+                            {(!inView || !globeReady) && (
+                                <GlobeSkeleton />
+                            )}
+
+                            {/* Render Globe when inView, pass onGlobeReady callback */}
+                            {inView && (
+                                <div className={`w-full h-full transition-opacity duration-1000 ${globeReady ? 'opacity-100' : 'opacity-0'}`}>
+                                    <GlobeViz
+                                        data={ARCS_DATA}
+                                        globeConfig={GLOBE_CONFIG}
+                                        onGlobeReady={() => setGlobeReady(true)}
+                                    />
+                                </div>
+                            )}
                         </div>
 
                         {/* Location Info Cards */}

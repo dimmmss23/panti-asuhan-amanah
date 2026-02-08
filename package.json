@@ -11,6 +11,7 @@
     "supabase": "prisma generate"
   },
   "dependencies": {
+    "@heroui/skeleton": "^2.2.18",
     "@prisma/client": "^5.22.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
@@ -29,6 +30,7 @@
     "prisma": "^5.22.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-intersection-observer": "^10.0.2",
     "three": "^0.182.0",
     "three-globe": "^2.45.0"
   },
