@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
 import type { GlobeConfig } from "./GlobeViz";
+
 
 // Dynamic import untuk GlobeViz (client-side only)
 const GlobeViz = dynamic(() => import("./GlobeViz"), {
@@ -57,18 +57,10 @@ const ARCS_DATA: Position[] = [];
 
 export default function GlobePanti() {
     const [mounted, setMounted] = useState(false);
-    const [shouldLoadGlobe, setShouldLoadGlobe] = useState(false);
 
     useEffect(() => {
         setMounted(true);
-        // Delay loading the heavy 3D globe to prioritize initial page render
-        const timer = setTimeout(() => {
-            setShouldLoadGlobe(true);
-        }, 2000);
-        return () => clearTimeout(timer);
     }, []);
-
-    if (!mounted) return null;
 
     return (
         <section className="relative py-16 sm:py-20 bg-white w-full overflow-hidden">
@@ -101,7 +93,7 @@ export default function GlobePanti() {
                         {/* Globe Visualization */}
                         <div className="relative w-full h-[280px] sm:h-[320px] md:h-[380px] z-10 pointer-events-auto mt-4">
                             <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/80 to-transparent z-40 pointer-events-none" />
-                            {shouldLoadGlobe && <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />}
+                            <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />
                         </div>
 
                         {/* Location Info Cards */}
@@ -135,16 +127,14 @@ export default function GlobePanti() {
                         {/* CTA Button */}
                         <div className="relative z-50 flex justify-center">
                             <Link href="/kontak" className="inline-block pointer-events-auto">
-                                <motion.button
-                                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-6 rounded-lg shadow-sm hover:shadow cursor-pointer transition-all duration-300 text-sm"
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
+                                <button
+                                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-6 rounded-lg shadow-sm hover:shadow cursor-pointer transition-all duration-300 transform hover:scale-105 active:scale-95 text-sm"
                                 >
                                     Lihat Lokasi Detail
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>
-                                </motion.button>
+                                </button>
                             </Link>
                         </div>
                     </div>

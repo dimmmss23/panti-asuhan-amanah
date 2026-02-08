@@ -55,15 +55,9 @@ const ARCS_DATA: Position[] = [];
 
 export default function GlobeKontak() {
     const [mounted, setMounted] = useState(false);
-    const [shouldLoadGlobe, setShouldLoadGlobe] = useState(false);
 
     useEffect(() => {
         setMounted(true);
-        // Delay loading 3D globe to improve initial load performance
-        const timer = setTimeout(() => {
-            setShouldLoadGlobe(true);
-        }, 2000); // 2 seconds delay
-        return () => clearTimeout(timer);
     }, []);
 
     if (!mounted) return null;
@@ -91,7 +85,7 @@ export default function GlobeKontak() {
                 {/* Globe Visualization */}
                 <div className="relative w-full h-[280px] md:h-[320px] z-0 pointer-events-auto mt-2">
                     <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-50 via-gray-50/80 to-transparent z-40 pointer-events-none" />
-                    {shouldLoadGlobe && <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />}
+                    <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />
                 </div>
             </div>
         </section>
