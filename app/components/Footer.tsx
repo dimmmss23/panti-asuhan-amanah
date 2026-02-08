@@ -39,7 +39,7 @@ const Footer = () => {
                     <motion.div className="lg:col-span-1" variants={itemVariants}>
                         <div className="flex items-center gap-3 mb-4">
                             <Image
-                                src="/logo.png"
+                                src="/Logo.png"
                                 alt="Logo Yayasan Panti Asuhan Amanah"
                                 width={64}
                                 height={64}
