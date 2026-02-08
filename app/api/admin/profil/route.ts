@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/app/libs/prisma";
 import { authGuard } from "@/app/libs/auth-guard";
 
@@ -34,6 +35,7 @@ export async function POST(req: NextRequest) {
       },
     });
   }
+  revalidatePath("/profil");
   return NextResponse.json({ profil });
 }
 

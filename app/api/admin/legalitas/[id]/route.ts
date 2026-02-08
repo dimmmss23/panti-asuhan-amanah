@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/app/libs/prisma";
 import { authGuard } from "@/app/libs/auth-guard";
 
@@ -15,6 +16,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       nomordokumen: body.nomordokumen,
     },
   });
+  revalidatePath("/profil");
   return NextResponse.json(legalitas);
 }
 
@@ -24,5 +26,6 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
   const { id } = await params;
   await prisma.legalitas.delete({ where: { id: Number(id) } });
+  revalidatePath("/profil");
   return NextResponse.json({ success: true });
 }
