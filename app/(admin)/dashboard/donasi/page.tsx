@@ -109,6 +109,9 @@ const DonasiAdminPage = () => {
         try {
             setIsUploading(true)
             const url = await uploadImage(file, 'kitabisa')
+            if (!url) {
+                throw new Error('Gagal meng-upload gambar')
+            }
             return url
         } catch (error) {
             console.error('Error uploading:', error)
