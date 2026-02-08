@@ -252,7 +252,7 @@ export function WebGLRendererConfig() {
     const { gl, size } = useThree();
 
     useEffect(() => {
-        gl.setPixelRatio(window.devicePixelRatio);
+        gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         gl.setSize(size.width, size.height);
         gl.setClearColor(0xffaaff, 0);
     }, [gl, size]);
@@ -272,6 +272,7 @@ export default function GlobeViz(props: WorldProps) {
         <Canvas
             scene={scene}
             camera={new PerspectiveCamera(50, aspect, 180, 1800)}
+            gl={{ powerPreference: "high-performance", antialias: false, alpha: true }}
         >
             <WebGLRendererConfig />
             <ambientLight color={globeConfig.ambientLight} intensity={0.6} />

@@ -148,8 +148,7 @@ const LiterasiPondok = () => {
                                     {/* Play Button */}
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <motion.div
-                                            className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600/90 rounded-full flex items-center justify-center shadow-lg group-hover/card:bg-green-600 group-hover/card:scale-110 transition-all duration-300"
-                                            whileHover={{ scale: 1.1 }}
+                                            className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600/90 rounded-full flex items-center justify-center shadow-lg group-hover/card:bg-green-600 group-hover/card:scale-110 transition-all duration-300 transform"
                                             whileTap={{ scale: 0.95 }}
                                         >
                                             <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -192,9 +191,8 @@ const LiterasiPondok = () => {
                                 {sliderVideos.map((video) => (
                                     <motion.div
                                         key={video.id}
-                                        className="flex-shrink-0 w-[200px] sm:w-full cursor-pointer group/card"
+                                        className="flex-shrink-0 w-[200px] sm:w-full cursor-pointer group/card hover:-translate-y-1 transition-transform duration-300"
                                         onClick={() => openModal(video)}
-                                        whileHover={{ y: -5 }}
                                     >
                                         <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-black ring-2 ring-white/30 hover:ring-green-400/50">
                                             {/* Thumbnail */}

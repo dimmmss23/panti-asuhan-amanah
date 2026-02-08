@@ -34,7 +34,7 @@ const Profil = () => {
                 >
                     {/* Subtle Top Accent Line */}
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600" />
-                    
+
                     <div className="relative z-10 p-6 sm:p-10 md:p-12">
                         {/* Header */}
                         <motion.div
@@ -60,7 +60,7 @@ const Profil = () => {
                         </motion.div>
 
                         {/* Feature Cards */}
-                        <motion.div 
+                        <motion.div
                             className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -70,8 +70,7 @@ const Profil = () => {
                             {features.map((feature, index) => (
                                 <motion.div
                                     key={index}
-                                    className="group relative bg-gray-50 rounded-xl p-5 border border-gray-100 hover:border-green-200 hover:bg-green-50/30 transition-all duration-300 flex flex-col items-center sm:items-start"
-                                    whileHover={{ y: -3 }}
+                                    className="group relative bg-gray-50 rounded-xl p-5 border border-gray-100 hover:border-green-200 hover:bg-green-50/30 transition-all duration-300 flex flex-col items-center sm:items-start hover:-translate-y-1"
                                 >
                                     <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center mb-3 group-hover:bg-green-700 transition-colors duration-300">
                                         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,7 +84,7 @@ const Profil = () => {
                         </motion.div>
 
                         {/* CTA Button */}
-                        <motion.div 
+                        <motion.div
                             className="text-center"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -94,9 +93,7 @@ const Profil = () => {
                         >
                             <Link href="/profil">
                                 <motion.span
-                                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-6 rounded-lg shadow-sm hover:shadow transition-all duration-300 text-sm"
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
+                                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-6 rounded-lg shadow-sm hover:shadow transition-all duration-300 text-sm hover:scale-105 active:scale-95"
                                 >
                                     Selengkapnya
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
