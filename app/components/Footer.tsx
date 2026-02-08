@@ -44,6 +44,7 @@ const Footer = () => {
                                 width={64}
                                 height={64}
                                 className="w-14 h-14 object-contain"
+                                unoptimized
                             />
                             <h3 className="text-yellow-400 font-bold text-base leading-tight">
                                 Yayasan Panti Asuhan<br />Amanah
@@ -169,6 +170,20 @@ const Footer = () => {
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
                 >
+                    {/* Links */}
+                    <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-4">
+                        <Link href="/faq" className="text-gray-300 hover:text-yellow-400 text-sm transition-colors">
+                            FAQ
+                        </Link>
+                        <span className="text-green-700">|</span>
+                        <Link href="/syarat-ketentuan" className="text-gray-300 hover:text-yellow-400 text-sm transition-colors">
+                            Syarat & Ketentuan
+                        </Link>
+                        <span className="text-green-700">|</span>
+                        <Link href="/kebijakan-privasi" className="text-gray-300 hover:text-yellow-400 text-sm transition-colors">
+                            Kebijakan Privasi
+                        </Link>
+                    </div>
                     <p className="text-center text-gray-400 text-sm">
                         © {currentYear} Yayasan Panti Asuhan Amanah. Dikelola dengan amanah untuk umat.
                     </p>
