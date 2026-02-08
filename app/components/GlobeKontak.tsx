@@ -7,7 +7,6 @@ import type { GlobeConfig } from "./GlobeViz";
 // Dynamic import untuk GlobeViz (client-side only)
 const GlobeViz = dynamic(() => import("./GlobeViz"), {
     ssr: false,
-    loading: () => <div className="h-full w-full bg-white animate-pulse" />,
 });
 
 // Tipe data untuk arc/posisi pada globe
@@ -84,7 +83,7 @@ export default function GlobeKontak() {
                 </div>
 
                 {/* Globe Visualization */}
-                <div className="relative w-full h-[280px] md:h-[320px] z-0 pointer-events-auto transition-opacity duration-500 mt-2">
+                <div className="relative w-full h-[280px] md:h-[320px] z-0 pointer-events-auto mt-2">
                     <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-50 via-gray-50/80 to-transparent z-40 pointer-events-none" />
                     <GlobeViz data={ARCS_DATA} globeConfig={GLOBE_CONFIG} />
                 </div>
