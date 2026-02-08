@@ -40,30 +40,50 @@ export default function ContactPage() {
                     <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
                         <div className="text-center max-w-3xl mx-auto">
                             {/* Decorative Icon */}
-                            <div className="flex justify-center mb-6">
+                            <motion.div
+                                className="flex justify-center mb-6"
+                                initial={{ opacity: 0, scale: 0 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5, delay: 0.1 }}
+                            >
                                 <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
                                     <svg className="w-8 h-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                     </svg>
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Title */}
-                            <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4">
+                            <motion.h1
+                                className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight mb-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                            >
                                 Hubungi Kami
-                            </h1>
+                            </motion.h1>
 
                             {/* Decorative Divider */}
-                            <div className="flex items-center justify-center gap-3 mb-6">
+                            <motion.div
+                                className="flex items-center justify-center gap-3 mb-6"
+                                initial={{ opacity: 0, scaleX: 0 }}
+                                animate={{ opacity: 1, scaleX: 1 }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                            >
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-400/70" />
                                 <div className="w-2 h-2 bg-amber-400 rounded-full" />
                                 <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-400/70" />
-                            </div>
+                            </motion.div>
 
                             {/* Description */}
-                            <p className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed">
+                            <motion.p
+                                className="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.5 }}
+                            >
                                 Kami siap mendengar dari Anda. Jangan ragu untuk menghubungi kami untuk pertanyaan, donasi, atau dukungan.
-                            </p>
+                            </motion.p>
                         </div>
                     </div>
 

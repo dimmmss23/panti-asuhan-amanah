@@ -117,8 +117,13 @@ const LiterasiPondok = () => {
                             </p>
                         </motion.div>
 
-                        {/* Main Video - Large */}
-                        <div className="mb-6">
+                        <motion.div
+                            className="mb-6"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                        >
                             <div
                                 className="relative w-full max-w-4xl mx-auto cursor-pointer group"
                                 onClick={() => openModal(mainVideo)}
@@ -153,18 +158,28 @@ const LiterasiPondok = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Slider Videos - Smaller Size */}
                         <div className="relative mt-6">
                             {/* Videos Slider */}
-                            <div
+                            <motion.div
                                 ref={sliderRef}
                                 className="flex sm:grid sm:grid-cols-3 gap-3 sm:gap-4 overflow-x-auto sm:overflow-visible scroll-smooth pb-4 sm:pb-0 max-w-4xl mx-auto"
                                 style={{
                                     scrollbarWidth: 'none',
                                     msOverflowStyle: 'none',
                                     WebkitOverflowScrolling: 'touch'
+                                }}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-50px" }}
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    visible: {
+                                        opacity: 1,
+                                        transition: { staggerChildren: 0.1 }
+                                    }
                                 }}
                             >
                                 <style jsx>{`
@@ -177,6 +192,10 @@ const LiterasiPondok = () => {
                                         key={video.id}
                                         className="flex-shrink-0 w-[200px] sm:w-full cursor-pointer group/card hover:-translate-y-1 transition-transform duration-300"
                                         onClick={() => openModal(video)}
+                                        variants={{
+                                            hidden: { opacity: 0, y: 20 },
+                                            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                                        }}
                                     >
                                         <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-black ring-2 ring-white/30 hover:ring-green-400/50">
                                             {/* Thumbnail */}
@@ -200,7 +219,7 @@ const LiterasiPondok = () => {
                                         </div>
                                     </motion.div>
                                 ))}
-                            </div>
+                            </motion.div>
 
                             {/* Scroll Progress Bar - Mobile Only */}
                             <div className="mt-6 sm:hidden max-w-4xl mx-auto">
