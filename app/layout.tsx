@@ -15,9 +15,10 @@ export default function RootLayout({
   return (
     <html lang="id">
       <head>
-        <title>Yayasan Panti Asuhan Amanah</title>
+        <title>Panti Asuhan Amanah</title>
         <meta name="description" content="Yayasan Panti Asuhan Amanah - Memuliakan anak yatim, piatu, dan dhuafa melalui pengasuhan berbasis kekeluargaan, pendidikan formal, dan pembinaan akhlak mulia di Palembang, Sumatera Selatan." />
         <meta name="keywords" content="panti asuhan, yayasan amanah, palembang, donasi, anak yatim, rumah tahfidz" />
+        <meta name="google-site-verification" content="TdIB4lhbLG9a8tJXGuRtGK4ob8jU9of2YWF-fBhj33w" />
       </head>
       <body className="overflow-x-hidden">
         <NextTopLoader
