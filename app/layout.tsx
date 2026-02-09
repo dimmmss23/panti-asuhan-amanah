@@ -1,41 +1,46 @@
-"use client";
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SmoothScrolling } from "./components/SmoothScrolling"
+import type { Metadata } from "next";
+import Providers from "./components/Providers";
 import "./globals.css";
 
-import NextTopLoader from "nextjs-toploader";
-
-const queryClient = new QueryClient()
+export const metadata: Metadata = {
+  title: {
+    template: "%s - Yayasan Panti Asuhan Amanah",
+    default: "Panti Asuhan Amanah - Yayasan Panti Asuhan Amanah",
+  },
+  description: "Yayasan Panti Asuhan Amanah - Memuliakan anak yatim, piatu, dan dhuafa melalui pengasuhan berbasis kekeluargaan, pendidikan formal, dan pembinaan akhlak mulia di Palembang, Sumatera Selatan.",
+  keywords: ["panti asuhan", "yayasan amanah", "palembang", "donasi", "anak yatim", "rumah tahfidz"],
+  openGraph: {
+    siteName: "Panti Asuhan Amanah",
+    type: "website",
+    locale: "id_ID",
+  },
+  verification: {
+    google: "TdIB4lhbLG9a8tJXGuRtGK4ob8jU9of2YWF-fBhj33w",
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Panti Asuhan Amanah",
+    "url": "https://www.pantiasuhanamanah.or.id/"
+  };
+
   return (
     <html lang="id">
-      <head>
-        <title>Panti Asuhan Amanah</title>
-        <meta name="description" content="Yayasan Panti Asuhan Amanah - Memuliakan anak yatim, piatu, dan dhuafa melalui pengasuhan berbasis kekeluargaan, pendidikan formal, dan pembinaan akhlak mulia di Palembang, Sumatera Selatan." />
-        <meta name="keywords" content="panti asuhan, yayasan amanah, palembang, donasi, anak yatim, rumah tahfidz" />
-        <meta name="google-site-verification" content="TdIB4lhbLG9a8tJXGuRtGK4ob8jU9of2YWF-fBhj33w" />
-      </head>
       <body className="overflow-x-hidden">
-        <SmoothScrolling>
-          <NextTopLoader
-            color="#10B981"
-            initialPosition={0.08}
-            crawlSpeed={200}
-            height={3}
-            crawl={true}
-            showSpinner={false}
-            easing="ease"
-            speed={200}
-            shadow="0 0 10px #10B981,0 0 5px #10B981"
-          />
-          <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-        </SmoothScrolling>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

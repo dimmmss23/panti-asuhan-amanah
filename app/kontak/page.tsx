@@ -82,7 +82,7 @@ export default function ContactPage() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.5 }}
                             >
-                                Kami siap mendengar dari Anda. Jangan ragu untuk menghubungi kami untuk pertanyaan, donasi, atau dukungan.
+                                Kami siap mendengar Anda. Jangan ragu untuk menghubungi kami untuk pertanyaan, donasi, atau dukungan.
                             </motion.p>
                         </div>
                     </div>
@@ -146,7 +146,6 @@ export default function ContactPage() {
                         </div>
                     </div>
 
-                    {/* Globe Section removed as per user request */}
 
                     {/* Maps Section Title */}
                     <div className="text-center pt-8 pb-4">
@@ -176,7 +175,7 @@ export default function ContactPage() {
                                 </div>
                                 <div className="flex items-center gap-1.5 bg-green-50 px-2.5 py-1 rounded-md border border-green-100">
                                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                                    <span className="text-xs text-green-700 font-medium">08.00 - 17.00 WIB</span>
+                                    <span className="text-xs text-green-700 font-medium">Siap 24 Jam</span>
                                 </div>
                             </div>
                             <div className="h-56 bg-gray-100 relative">
@@ -229,7 +228,7 @@ export default function ContactPage() {
                                 </div>
                                 <div className="flex items-center gap-1.5 bg-green-50 px-2.5 py-1 rounded-md border border-green-100">
                                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                                    <span className="text-xs text-green-700 font-medium">08.00 - 17.00 WIB</span>
+                                    <span className="text-xs text-green-700 font-medium">Siap 24 Jam</span>
                                 </div>
                             </div>
                             <div className="h-56 bg-gray-100 relative">
