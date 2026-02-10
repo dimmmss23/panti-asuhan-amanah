@@ -1,11 +1,14 @@
 "use client"
 
+import React from "react"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import Navbar from "@/app/components/Navbar"
 import Footer from "@/app/components/Footer"
+import GalleryShowcase from "@/app/components/GalleryShowcase"
+
 
 interface Gallery {
     id: number
@@ -34,6 +37,50 @@ const GaleriPage = () => {
             year: "numeric"
         })
     }
+
+    // Pagination
+    const ITEMS_PER_PAGE = 9;
+    const [currentPage, setCurrentPage] = React.useState(1);
+
+    // Sort galleries by date descending (newest first) and calculate pagination
+    const sortedGalleries = React.useMemo(() => {
+        if (!galleries) return [];
+        return [...galleries].sort((a, b) => {
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+    }, [galleries]);
+
+    const totalItems = sortedGalleries.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const currentGalleries = sortedGalleries.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+    // Reset to page 1 when galleries data changes
+    React.useEffect(() => {
+        setCurrentPage(1);
+    }, [galleries]);
+
+    // Scroll to gallery section when page changes
+    React.useEffect(() => {
+        const gallerySection = document.getElementById('gallery-section');
+        if (gallerySection && currentPage > 1) {
+            gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [currentPage]);
+
+    // Debug logging
+    React.useEffect(() => {
+        console.log('Pagination Debug:', {
+            totalGalleries: sortedGalleries.length,
+            currentPage,
+            totalPages,
+            startIndex,
+            currentGalleriesCount: currentGalleries.length,
+            firstItemTitle: currentGalleries[0]?.title
+        });
+    }, [currentPage, sortedGalleries, currentGalleries, totalPages, startIndex]);
+
+
 
     // Animation Variants
     const containerVariants = {
@@ -165,9 +212,24 @@ const GaleriPage = () => {
                     </div>
                 </section>
 
+                {/* Album Section Title */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-4">
+                    <div className="flex items-center gap-3">
+                        <div className="w-1.5 h-8 bg-emerald-500 rounded-full" />
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Album</h2>
+                    </div>
+                </div>
+
+                <GalleryShowcase withButton={true} />
+
                 {/* Gallery Section */}
-                <section className="py-12 sm:py-16 bg-gray-50">
+                <section id="gallery-section" className="py-12 sm:py-16 bg-gray-50">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        {/* Berita Terbaru Title */}
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="w-1.5 h-8 bg-emerald-500 rounded-full" />
+                            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Berita Terbaru</h2>
+                        </div>
                         {isLoading ? (
                             <div className="flex items-center justify-center min-h-[300px]">
                                 <div className="flex flex-col items-center gap-4">
@@ -187,82 +249,118 @@ const GaleriPage = () => {
                                 <p className="text-red-500 text-lg">Gagal memuat galeri</p>
                                 <p className="text-gray-500 mt-2">Silakan coba lagi nanti</p>
                             </motion.div>
-                        ) : galleries && galleries.length > 0 ? (
-                            <motion.div
-                                className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
-                                variants={containerVariants}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, margin: "-100px" }}
-                            >
-                                {galleries.map((gallery) => (
-                                    <motion.article
-                                        key={gallery.id}
-                                        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col"
-                                        variants={itemVariants}
-                                    >
-                                        {/* Image Container */}
-                                        <Link
-                                            href={`/galeri/${gallery.id}#main-content`}
-                                            className="relative aspect-[4/3] overflow-hidden block"
+                        ) : sortedGalleries.length > 0 ? (
+                            <>
+                                <motion.div
+                                    key={`page-${currentPage}`}
+                                    className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+                                    variants={containerVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    viewport={{ once: true, margin: "-100px" }}
+                                >
+                                    {currentGalleries.map((gallery) => (
+                                        <motion.article
+                                            key={gallery.id}
+                                            className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col"
+                                            variants={itemVariants}
                                         >
-                                            <Image
-                                                src={gallery.imageUrl}
-                                                alt={gallery.title}
-                                                fill
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                            />
-                                        </Link>
-
-                                        {/* Content - flex-1 to push button to bottom */}
-                                        <div className="p-3 sm:p-5 flex flex-col flex-1">
-                                            {/* Date */}
-                                            <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">
-                                                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                                <time dateTime={gallery.createdAt} className="text-xs sm:text-sm">
-                                                    {formatDate(gallery.createdAt)}
-                                                </time>
-                                            </div>
-
-                                            {/* Title */}
-                                            <Link href={`/galeri/${gallery.id}#main-content`}>
-                                                <h3 className="text-sm sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors">
-                                                    {gallery.title}
-                                                </h3>
-                                            </Link>
-
-                                            {/* Description - Limited with line-clamp */}
-                                            {gallery.description && (
-                                                <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
-                                                    {gallery.description}
-                                                </p>
-                                            )}
-
-                                            {/* Spacer to push button to bottom */}
-                                            <div className="flex-1"></div>
-
-                                            {/* Read More Link - Always at bottom */}
+                                            {/* Image Container */}
                                             <Link
                                                 href={`/galeri/${gallery.id}#main-content`}
-                                                className="inline-flex items-center gap-1 sm:gap-2 text-green-600 font-medium text-xs sm:text-sm hover:text-green-700 transition-colors group/link mt-auto"
+                                                className="relative aspect-[4/3] overflow-hidden block"
                                             >
-                                                Baca Selengkapnya
-                                                <svg
-                                                    className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover/link:translate-x-1 transition-transform"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                                </svg>
+                                                <Image
+                                                    src={gallery.imageUrl}
+                                                    alt={gallery.title}
+                                                    fill
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                />
                                             </Link>
+
+                                            {/* Content - flex-1 to push button to bottom */}
+                                            <div className="p-3 sm:p-5 flex flex-col flex-1">
+                                                {/* Date */}
+                                                <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">
+                                                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                    <time dateTime={gallery.createdAt} className="text-xs sm:text-sm">
+                                                        {formatDate(gallery.createdAt)}
+                                                    </time>
+                                                </div>
+
+                                                {/* Title */}
+                                                <Link href={`/galeri/${gallery.id}#main-content`}>
+                                                    <h3 className="text-sm sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors">
+                                                        {gallery.title}
+                                                    </h3>
+                                                </Link>
+
+                                                {/* Description - Limited with line-clamp */}
+                                                {gallery.description && (
+                                                    <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
+                                                        {gallery.description}
+                                                    </p>
+                                                )}
+
+                                                {/* Spacer to push button to bottom */}
+                                                <div className="flex-1"></div>
+
+                                                {/* Read More Link - Always at bottom */}
+                                                <Link
+                                                    href={`/galeri/${gallery.id}#main-content`}
+                                                    className="inline-flex items-center gap-1 sm:gap-2 text-green-600 font-medium text-xs sm:text-sm hover:text-green-700 transition-colors group/link mt-auto"
+                                                >
+                                                    Baca Selengkapnya
+                                                    <svg
+                                                        className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover/link:translate-x-1 transition-transform"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                    </svg>
+                                                </Link>
+                                            </div>
+                                        </motion.article>
+                                    ))}
+                                </motion.div>
+
+                                {/* Pagination Navigation */}
+                                {totalPages > 1 && (
+                                    <div className="flex items-center justify-center gap-4 mt-8">
+                                        <button
+                                            onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                            disabled={currentPage === 1}
+                                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                            <span className="font-medium">Sebelumnya</span>
+                                        </button>
+
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-sm text-gray-600">
+                                                Halaman <span className="font-semibold text-emerald-600">{currentPage}</span> dari <span className="font-semibold">{totalPages}</span>
+                                            </span>
                                         </div>
-                                    </motion.article>
-                                ))}
-                            </motion.div>
+
+                                        <button
+                                            onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                            disabled={currentPage === totalPages}
+                                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                        >
+                                            <span className="font-medium">Selanjutnya</span>
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                )}
+                            </>
                         ) : (
                             <div className="text-center py-16">
                                 <svg className="w-20 h-20 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -270,7 +368,8 @@ const GaleriPage = () => {
                                 </svg>
                                 <h3 className="text-xl font-semibold text-gray-700 mb-2">Belum Ada Foto</h3>
                                 <p className="text-gray-500">Galeri foto akan segera hadir</p>
-                            </div>
+                            </div
+                            >
                         )}
                     </div>
                 </section>

@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import { useState } from "react"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { uploadImage, deleteImage } from "@/app/libs/supabase-storage"
@@ -34,6 +35,7 @@ const GalleryPage = () => {
     })
     const [previewUrl, setPreviewUrl] = useState<string>("")
     const [isUploading, setIsUploading] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
 
     // Fetch galleries
     const { data: galleries, isLoading, error } = useQuery<Gallery[]>({
@@ -44,6 +46,33 @@ const GalleryPage = () => {
             return res.json()
         }
     })
+
+    // Pagination
+    const ITEMS_PER_PAGE = 9;
+
+    // Sort galleries by date descending (newest first)
+    const sortedGalleries = React.useMemo(() => {
+        if (!galleries) return [];
+        return [...galleries].sort((a, b) => {
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+    }, [galleries]);
+
+    const totalItems = sortedGalleries.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const currentGalleries = sortedGalleries.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+    // Scroll to gallery grid when page changes
+    React.useEffect(() => {
+        const galleryGrid = document.getElementById('admin-gallery-grid');
+        if (galleryGrid && currentPage > 1) {
+            galleryGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [currentPage]);
+
+
+
 
     // Create mutation
     const createMutation = useMutation({
@@ -228,79 +257,117 @@ const GalleryPage = () => {
                 </div>
 
                 {/* Gallery Grid */}
-                {galleries && galleries.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {galleries.map((gallery) => (
-                            <div
-                                key={gallery.id}
-                                className="bg-white rounded-xl shadow-md overflow-hidden group"
-                            >
-                                <div className="relative aspect-square">
-                                    <Image
-                                        src={gallery.imageUrl}
-                                        alt={gallery.title}
-                                        fill
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                                        className="object-cover sm:group-hover:scale-105 transition-transform duration-300"
-                                    />
-                                    {/* Overlay - selalu terlihat di mobile, hover di desktop */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent sm:bg-black/0 sm:group-hover:bg-black/40 transition-colors duration-300">
-                                        {/* Tombol aksi - posisi berbeda untuk mobile dan desktop */}
-                                        <div className="absolute bottom-2 right-2 flex gap-2 sm:opacity-0 sm:group-hover:opacity-100 sm:absolute sm:inset-0 sm:flex sm:items-center sm:justify-center transition-opacity duration-300">
-                                            <button
-                                                onClick={() => openEditModal(gallery)}
-                                                className="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors shadow-md"
-                                                title="Edit"
+                <div id="admin-gallery-grid">
+                    {sortedGalleries.length > 0 ? (
+                        <>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {currentGalleries.map((gallery) => (
+                                    <div
+                                        key={gallery.id}
+                                        className="bg-white rounded-xl shadow-md overflow-hidden group"
+                                    >
+                                        <div className="relative aspect-square">
+                                            <Image
+                                                src={gallery.imageUrl}
+                                                alt={gallery.title}
+                                                fill
+                                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                                                className="object-cover sm:group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                            {/* Overlay - selalu terlihat di mobile, hover di desktop */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent sm:bg-black/0 sm:group-hover:bg-black/40 transition-colors duration-300">
+                                                {/* Tombol aksi - posisi berbeda untuk mobile dan desktop */}
+                                                <div className="absolute bottom-2 right-2 flex gap-2 sm:opacity-0 sm:group-hover:opacity-100 sm:absolute sm:inset-0 sm:flex sm:items-center sm:justify-center transition-opacity duration-300">
+                                                    <button
+                                                        onClick={() => openEditModal(gallery)}
+                                                        className="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors shadow-md"
+                                                        title="Edit"
+                                                    >
+                                                        <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                        </svg>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => openDeleteModal(gallery)}
+                                                        className="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors shadow-md"
+                                                        title="Hapus"
+                                                    >
+                                                        <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="p-4">
+                                            <h3 className="font-semibold text-gray-900 truncate">{gallery.title}</h3>
+                                            {gallery.description && (
+                                                <p className="text-gray-500 text-sm mt-1 line-clamp-2">{gallery.description}</p>
+                                            )}
+                                            <a
+                                                href={`/dashboard/gallery/${gallery.id}`}
+                                                className="inline-flex items-center gap-1 mt-3 text-sm text-indigo-600 hover:text-indigo-700 font-medium"
                                             >
-                                                <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                Lihat Selengkapnya
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
-                                            </button>
-                                            <button
-                                                onClick={() => openDeleteModal(gallery)}
-                                                className="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors shadow-md"
-                                                title="Hapus"
-                                            >
-                                                <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="p-4">
-                                    <h3 className="font-semibold text-gray-900 truncate">{gallery.title}</h3>
-                                    {gallery.description && (
-                                        <p className="text-gray-500 text-sm mt-1 line-clamp-2">{gallery.description}</p>
-                                    )}
-                                    <a
-                                        href={`/dashboard/gallery/${gallery.id}`}
-                                        className="inline-flex items-center gap-1 mt-3 text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+                                ))}
+                            </div>
+
+                            {/* Pagination Navigation */}
+                            {totalPages > 1 && (
+                                <div className="flex items-center justify-center gap-4 mt-8">
+                                    <button
+                                        onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                        disabled={currentPage === 1}
+                                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
                                     >
-                                        Lihat Selengkapnya
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                        <span className="font-medium">Sebelumnya</span>
+                                    </button>
+
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-sm text-gray-600">
+                                            Halaman <span className="font-semibold text-indigo-600">{currentPage}</span> dari <span className="font-semibold">{totalPages}</span>
+                                        </span>
+                                    </div>
+
+                                    <button
+                                        onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                        disabled={currentPage === totalPages}
+                                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+                                    >
+                                        <span className="font-medium">Selanjutnya</span>
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                         </svg>
-                                    </a>
+                                    </button>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-center py-12 bg-gray-50 rounded-xl">
-                        <svg className="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p className="text-gray-500">Belum ada gambar di galeri</p>
-                        <button
-                            onClick={openCreateModal}
-                            className="mt-4 text-indigo-600 hover:text-indigo-700 font-medium"
-                        >
-                            Tambah gambar pertama
-                        </button>
-                    </div>
-                )}
+                            )}
+                        </>
+                    ) : (
+                        <div className="text-center py-12 bg-gray-50 rounded-xl">
+                            <svg className="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <p className="text-gray-500">Belum ada gambar di galeri</p>
+                            <button
+                                onClick={openCreateModal}
+                                className="mt-4 text-indigo-600 hover:text-indigo-700 font-medium"
+                            >
+                                Tambah gambar pertama
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
+
 
             {/* Create/Edit Modal */}
             {isModalOpen && (

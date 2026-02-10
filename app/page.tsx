@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import MutiaraHikmah from "./components/MutiaraHikmah";
 import Galeri from "./components/Galeri";
 import GlobePanti from "./components/GlobePanti";
+import GalleryShowcase from "./components/GalleryShowcase";
 
 const Page = () => {
   return (

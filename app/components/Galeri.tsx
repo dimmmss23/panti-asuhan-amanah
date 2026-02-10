@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import GalleryShowcase from "./GalleryShowcase"
 
 interface Gallery {
     id: number
@@ -62,6 +63,19 @@ const Galeri = () => {
     return (
         <section className="py-16 sm:py-20 bg-gray-50 overflow-hidden">
             <div className="container mx-auto px-4 max-w-6xl">
+                {/* Section Header */}
+                <div className="text-center mb-10 md:mb-12">
+                    <span className="inline-block py-1 px-3 rounded-full bg-emerald-50 text-emerald-600 text-sm font-semibold mb-4 border border-emerald-100">
+                        Galeri & Aktivitas
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Jendela Kegiatan Panti
+                    </h2>
+                    <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                        Intip berbagai momen kebersamaan, kegiatan belajar, dan aktivitas harian anak-anak asuh kami yang penuh semangat dan keceriaan.
+                    </p>
+                </div>
+
                 {/* Main Card */}
                 <div
                     className="relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
@@ -69,24 +83,22 @@ const Galeri = () => {
                     {/* Subtle Top Accent Line */}
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600" />
 
-                    <div className="relative z-10 p-6 sm:p-10 md:p-12">
-                        {/* Section Header */}
-                        <div
-                            className="text-center mb-10"
-                        >
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-md border border-green-100 mb-4">
-                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                Dokumentasi
-                            </span>
-                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                                Galeri Kegiatan
-                            </h2>
-                            <div className="w-12 h-0.5 bg-green-600 mx-auto rounded-full mb-5"></div>
-                            <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
-                                Dokumentasi kegiatan dan momen berharga di Panti Asuhan Amanah
-                            </p>
+                    <div className="relative z-10 pt-10 pb-6 px-4 md:px-8">
+                        {/* Header Album */}
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-1.5 h-8 bg-emerald-500 rounded-full" />
+                            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Album</h2>
+                        </div>
+
+                        {/* Gallery Showcase (Riam/Slide) */}
+                        <GalleryShowcase withButton={false} />
+                    </div>
+
+                    <div className="relative z-10 px-6 sm:px-10 md:px-12 pb-12">
+                        {/* Section Header Berita */}
+                        <div className="flex items-center gap-3 mb-8 mt-8 border-t border-gray-100 pt-10">
+                            <div className="w-1.5 h-8 bg-emerald-500 rounded-full" />
+                            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Berita Terbaru</h2>
                         </div>
 
                         {/* Gallery Grid - 2 columns on mobile */}
@@ -94,7 +106,7 @@ const Galeri = () => {
                             <div className="flex items-center justify-center min-h-[300px]">
                                 <div className="flex flex-col items-center gap-4">
                                     <div className="animate-spin rounded-full h-10 w-10 border-2 border-green-600 border-t-transparent"></div>
-                                    <p className="text-gray-500 text-sm">Memuat galeri...</p>
+                                    <p className="text-gray-500 text-sm">Memuat berita...</p>
                                 </div>
                             </div>
                         ) : latestGalleries.length > 0 ? (

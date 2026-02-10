@@ -70,27 +70,9 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
             <Navbar />
 
             <main className="flex-grow">
-                {/* Hero Section - Islamic Elegant Theme with Photo */}
-                <section className="relative w-full min-h-[400px] md:min-h-[500px] overflow-hidden">
-                    {/* Background Image */}
-                    <motion.div
-                        className="absolute inset-0"
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2 }}
-                    >
-                        <Image
-                            src="/Hero Profil.png"
-                            alt="Hero Profil"
-                            fill
-                            sizes="100vw"
-                            className="object-cover object-center"
-                            priority
-                        />
-                    </motion.div>
+                {/* Hero Section - Islamic Elegant Theme with Gradient Background */}
+                <section className="relative w-full min-h-[400px] md:min-h-[500px] overflow-hidden bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900">
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/70 via-emerald-800/50 to-black/80" />
 
                     {/* Islamic Geometric Pattern Overlay */}
                     <div className="absolute inset-0 opacity-10">
@@ -228,6 +210,21 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                                 Yayasan Panti Asuhan Amanah
                             </motion.h1>
 
+                            {/* Photo Section */}
+                            <motion.div
+                                className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-lg my-6"
+                                variants={itemVariants}
+                            >
+                                <Image
+                                    src="/komponenGaleri/2.jpeg"
+                                    alt="Kegiatan Panti Asuhan Amanah"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 896px"
+                                    className="object-cover"
+                                    style={{ objectPosition: 'center 65%' }}
+                                />
+                            </motion.div>
+
                             <motion.p
                                 className="text-gray-600 text-base md:text-lg leading-relaxed text-justify md:text-center"
                                 variants={itemVariants}
@@ -262,7 +259,7 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                                     {legalitas.map((item) => (
                                         <motion.div
                                             key={item.id}
-                                            className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex items-center gap-4"
+                                            className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col sm:flex-row items-start sm:items-center gap-4"
                                             variants={scaleVariants}
                                         >
                                             <div className="w-10 h-10 md:w-12 md:h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600 shrink-0">
@@ -270,9 +267,9 @@ const ProfilClient = ({ profil, legalitas }: ProfilClientProps) => {
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={getIconForLegalitas(item.jenisdokumen)} />
                                                 </svg>
                                             </div>
-                                            <div>
-                                                <h3 className="font-semibold text-gray-800 text-sm">{item.jenisdokumen}</h3>
-                                                <p className="text-gray-600 font-medium text-xs md:text-sm break-all">{item.nomordokumen}</p>
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className="font-semibold text-gray-800 text-sm mb-1">{item.jenisdokumen}</h3>
+                                                <p className="text-gray-600 font-medium text-xs md:text-sm break-words">{item.nomordokumen}</p>
                                             </div>
                                         </motion.div>
                                     ))}
