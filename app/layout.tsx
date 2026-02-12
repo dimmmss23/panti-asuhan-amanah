@@ -34,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className="overflow-x-hidden">
+        {/* JSON-LD untuk Google Site Name */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
