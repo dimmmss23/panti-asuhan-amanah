@@ -61,6 +61,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         signIn: "/login"
     },
     session: {
-        strategy: "jwt"
+        strategy: "jwt",
+        maxAge: 30 * 24 * 60 * 60,      // 30 hari (dalam detik)
+        updateAge: 60 * 60,              // 1 jam (dalam detik) - auto logout jika tidak aktif 1 jam
     }
 })

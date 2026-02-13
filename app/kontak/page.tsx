@@ -82,7 +82,7 @@ export default function ContactPage() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.5 }}
                             >
-                                Kami siap mendengar Anda. Jangan ragu untuk menghubungi kami untuk pertanyaan, donasi, atau dukungan.
+                                Kami siap mendengar Anda. Jangan ragu untuk menghubungi kami untuk masukan, saran, pertanyaan, donasi, atau dukungan.
                             </motion.p>
                         </div>
                     </div>

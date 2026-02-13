@@ -1,0 +1,12 @@
+# robots.txt untuk Yayasan Panti Asuhan Amanah
+
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+User-agent: *
+Disallow: /admin/
+Disallow: /login
+
+# Sitemap
+Sitemap: https://www.pantiasuhanamanah.or.id/sitemap.xml
