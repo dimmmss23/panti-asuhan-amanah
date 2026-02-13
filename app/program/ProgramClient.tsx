@@ -9,7 +9,7 @@ const ProgramClient = () => {
     const programs = [
         {
             title: "Pendidikan",
-            description: "Yayasan Amanah menjamin hak pendidikan setiap anak asuh mulai dari jenjang SD, SMP, SMA/SMK, hingga kuliah. Kami memfasilitasi kebutuhan sekolah agar mereka tumbuh menjadi generasi cerdas.",
+            description: "Yayasan Amanah menjamin hak pendidikan setiap anak asuh mulai dari jenjang SD, SMP, SMA/SMK. Kami memfasilitasi kebutuhan sekolah agar mereka tumbuh menjadi generasi cerdas.",
             icon: (
                 <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     {/* Book / Education */}
