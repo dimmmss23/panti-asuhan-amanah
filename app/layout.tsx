@@ -29,12 +29,18 @@ export default function RootLayout({
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Yayasan Panti Asuhan Amanah",
+      "@id": "https://www.pantiasuhanamanah.or.id/#website",
+      "name": "Panti Asuhan Amanah Palembang",
+      "alternateName": [
+        "Panti Asuhan Amanah",
+        "Yayasan Panti Asuhan Amanah Palembang"
+      ],
       "url": "https://www.pantiasuhanamanah.or.id/"
     },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://www.pantiasuhanamanah.or.id/#organization",
       "name": "Yayasan Panti Asuhan Amanah",
       "alternateName": [
         "Panti Asuhan Amanah",
