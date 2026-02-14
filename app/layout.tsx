@@ -7,12 +7,13 @@ export const metadata: Metadata = {
     template: "%s - Yayasan Panti Asuhan Amanah",
     default: "Panti Asuhan Amanah - Yayasan Panti Asuhan Amanah",
   },
-  description: "Yayasan Panti Asuhan Amanah - Memuliakan anak yatim, piatu, dan dhuafa melalui pengasuhan berbasis kekeluargaan, pendidikan formal, dan pembinaan akhlak mulia di Palembang, Sumatera Selatan.",
+  description: "Yayasan Panti Asuhan Amanah hadir sebagai wujud kepedulian nyata terhadap anak-anak yatim, piatu, dan dhuafa.",
   keywords: ["panti asuhan", "yayasan amanah", "palembang", "donasi", "anak yatim", "rumah tahfidz"],
   openGraph: {
     siteName: "Panti Asuhan Amanah Palembang",
     type: "website",
     locale: "id_ID",
+    description: "Yayasan Panti Asuhan Amanah hadir sebagai wujud kepedulian nyata terhadap anak-anak yatim, piatu, dan dhuafa.",
   },
   verification: {
     google: "TdIB4lhbLG9a8tJXGuRtGK4ob8jU9of2YWF-fBhj33w",
